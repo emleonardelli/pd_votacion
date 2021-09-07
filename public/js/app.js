@@ -21031,19 +21031,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var primevue_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/button */ "./node_modules/primevue/button/button.esm.js");
+/* harmony import */ var primevue_inputtext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/inputtext */ "./node_modules/primevue/inputtext/inputtext.esm.js");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  data: function data() {
+    return {
+      candidates: []
+    };
+  },
+  mounted: function mounted() {
+    this.candidates = this.getCandidates();
+  },
+  methods: {
+    save: function save() {
+      var model = {
+        circuito: document.getElementById('circuito').value,
+        mesa: document.getElementById('mesa').value,
+        total: document.getElementById('total').value
+      };
+      this.candidates.map(function (candidate) {
+        model["candidato_".concat(candidate.id)] = document.getElementById("candidato_".concat(candidate.id)).value;
+      });
+      axios.post('/api/saveCandidates', model).then(function (res) {
+        console.log(res);
+      });
+    },
+    getCandidates: function getCandidates() {
+      var _this = this;
+
+      return axios.get('/api/getCandidates').then(function (data) {
+        return _this.candidates = data.data;
+      });
+    }
+  },
   components: {
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head,
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
-    Button: primevue_button__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
-  methods: {
-    irLogin: function irLogin() {
-      window.location.href = "/login";
-    }
+    Button: primevue_button__WEBPACK_IMPORTED_MODULE_2__["default"],
+    InputText: primevue_inputtext__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
 
@@ -25055,7 +25083,7 @@ __webpack_require__.r(__webpack_exports__);
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-317d1a6e");
 
 var _hoisted_1 = {
-  "class": "relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0"
+  "class": "relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0"
 };
 var _hoisted_2 = {
   "class": "max-w-6xl mx-auto sm:px-6 lg:px-8"
@@ -25064,55 +25092,144 @@ var _hoisted_3 = {
   "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
 };
 var _hoisted_4 = {
-  "class": "grid grid-cols-1 md:grid-cols-2"
-};
-var _hoisted_5 = {
   "class": "p-6"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex items-center"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "ml-1 text-lg leading-7 font-semibold"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "underline text-gray-900 dark:text-white"
-}, "Elecciones 2021")])], -1
+}, "Formulario de Carga de Votos")])], -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
 var _hoisted_7 = {
-  "class": "ml-1"
+  "class": "p-fluid"
 };
 var _hoisted_8 = {
-  "class": "mt-2 text-center text-gray-600 dark:text-gray-400 text-sm"
+  "class": "p-field"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sistema de Votacion ");
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  style: {
+    "width": "50%",
+    "float": "left"
+  },
+  "for": "circuito"
+}, "Circuito N°", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_10 = {
+  "class": "p-field"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  style: {
+    "width": "50%",
+    "float": "left"
+  },
+  "for": "mesa"
+}, "Mesa N°", -1
 /* HOISTED */
 );
+
+var _hoisted_12 = {
+  "class": "p-field"
+};
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  style: {
+    "width": "50%",
+    "float": "left"
+  },
+  "for": "total"
+}, "Total Votantes Empadronados", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  "class": "p-fluid"
+};
+var _hoisted_15 = ["for", "textContent"];
+var _hoisted_16 = {
+  "class": "mt-2 text-center text-gray-600 dark:text-gray-400 text-sm"
+};
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
+  var _component_InputText = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputText");
+
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Elecciones 2021"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    style: {
+      "width": "50%",
+      "float": "left",
+      "margin-bottom": "10px"
+    },
+    id: "circuito",
+    type: "number"
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    style: {
+      "width": "50%",
+      "float": "left",
+      "margin-bottom": "10px"
+    },
+    id: "mesa",
+    type: "number"
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    style: {
+      "width": "50%",
+      "float": "left",
+      "margin-bottom": "10px"
+    },
+    id: "total",
+    type: "number"
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidates, function (candidate) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: candidate,
+      "class": "p-field"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+      style: {
+        "width": "70%",
+        "float": "left"
+      },
+      "for": "candidato_".concat(candidate.id),
+      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(candidate.titulo)
+    }, null, 8
+    /* PROPS */
+    , _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+      style: {
+        "width": "30%",
+        "float": "left",
+        "margin-bottom": "10px"
+      },
+      id: "candidato_".concat(candidate.id),
+      type: "number"
+    }, null, 8
+    /* PROPS */
+    , ["id"])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
     "class": "p-button-lg",
-    label: "Entrar",
+    label: "Guardar",
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.irLogin();
+      return _ctx.save();
     })
-  })])])])])])])])], 64
+  })])])])])])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -48585,6 +48702,53 @@ var PrimeVue = {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PrimeVue);
 
+
+
+/***/ }),
+
+/***/ "./node_modules/primevue/inputtext/inputtext.esm.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/primevue/inputtext/inputtext.esm.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var script = {
+    name: 'InputText',
+    emits: ['update:modelValue'],
+    props: {
+        modelValue: null
+    },
+    methods: {
+        onInput(event) {
+            this.$emit('update:modelValue', event.target.value);
+        }
+    },
+    computed: {
+        filled() {
+            return (this.modelValue != null && this.modelValue.toString().length > 0)
+        }
+    }
+};
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+    class: ['p-inputtext p-component', {'p-filled': $options.filled}],
+    value: $props.modelValue,
+    onInput: _cache[1] || (_cache[1] = (...args) => ($options.onInput && $options.onInput(...args)))
+  }, null, 42, ["value"]))
+}
+
+script.render = render;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (script);
 
 
 /***/ }),

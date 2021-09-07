@@ -1,21 +1,60 @@
 <template>
     <Head title="Elecciones 2021" />
 
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <div class="ml-1 text-lg leading-7 font-semibold"><span class="underline text-gray-900 dark:text-white">Elecciones 2021</span></div>
+                <div class="p-6">
+                    <div class="flex items-center">
+                        <div class="ml-1 text-lg leading-7 font-semibold"><span class="underline text-gray-900 dark:text-white">Formulario de Carga de Votos</span></div>
+                    </div>
+                    <br>
+                    <div class="p-fluid">
+                        <div class="p-field">
+                            <label
+                                style="width: 50%; float: left"
+                                for="circuito">Circuito N&deg;</label>
+                            <InputText
+                                style="width: 50%; float: left;margin-bottom: 10px"
+                                id="circuito" type="number" />
                         </div>
-
-                        <div class="ml-1">
-                            <div class="mt-2 text-center text-gray-600 dark:text-gray-400 text-sm">
-                                Sistema de Votacion <br><br>
-                                <Button class="p-button-lg" label="Entrar" @click="irLogin()"/>
-                            </div>
+                        <div class="p-field">
+                            <label
+                                style="width: 50%; float: left"
+                                for="mesa">Mesa N&deg;</label>
+                            <InputText
+                                style="width: 50%; float: left;margin-bottom: 10px"
+                                id="mesa" type="number" />
                         </div>
+                        <div class="p-field">
+                            <label
+                                style="width: 50%; float: left"
+                                for="total">Total Votantes Empadronados</label>
+                            <InputText
+                                style="width: 50%; float: left;margin-bottom: 10px;"
+                                id="total" type="number" />
+                        </div>
+                    </div>
+                    <div class="p-fluid">
+                        <div
+                            v-for="candidate in candidates"
+                            :key="candidate"
+                            class="p-field"
+                        >
+                            <label
+                                style="width: 70%; float: left"
+                                :for="`candidato_${candidate.id}`"
+                                v-text="candidate.titulo"
+                            ></label>
+                            <InputText
+                                style="width: 30%; float: left; margin-bottom: 10px"
+                                :id="`candidato_${candidate.id}`"
+                                type="number"
+                            />
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center text-gray-600 dark:text-gray-400 text-sm">
+                        <Button class="p-button-lg" label="Guardar" @click="save()"/>
                     </div>
                 </div>
             </div>
@@ -91,17 +130,40 @@
     import { defineComponent } from 'vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Button from 'primevue/button';
+    import InputText from 'primevue/inputtext';
 
     export default defineComponent({
+        data() {
+            return {
+                candidates: [],
+            }
+        },
+        mounted() {
+            this.candidates = this.getCandidates();
+        },
+        methods: {
+            save() {
+                let model = {
+                    circuito: document.getElementById('circuito').value,
+                    mesa: document.getElementById('mesa').value,
+                    total: document.getElementById('total').value,
+                };
+                this.candidates.map((candidate) => {
+                    model[`candidato_${candidate.id}`] = document.getElementById(`candidato_${candidate.id}`).value;
+                })
+                axios.post('/api/saveCandidates', model).then((res) => {
+                    console.log(res);
+                });
+            },
+            getCandidates() {
+                return axios.get('/api/getCandidates').then((data) => this.candidates = data.data);
+            },
+        },
         components: {
             Head,
             Link,
             Button,
-        },
-        methods: {
-            irLogin() {
-                window.location.href = "/login";
-            }
+            InputText
         },
     })
 </script>
