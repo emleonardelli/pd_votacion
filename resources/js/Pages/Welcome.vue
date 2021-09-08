@@ -32,7 +32,7 @@
                                 for="total">Total Votantes Empadronados</label>
                             <InputText
                                 style="width: 50%; float: left;margin-bottom: 10px;"
-                                id="total" type="number" />
+                                id="total" type="number"/>
                         </div>
                     </div>
                     <div class="p-fluid">
