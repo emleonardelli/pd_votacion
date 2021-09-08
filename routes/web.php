@@ -19,6 +19,10 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
+Route::get('/estadisticas', function () {
+    return Inertia::render('Statistics');
+})->name('inicio');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
