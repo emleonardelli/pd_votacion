@@ -13,7 +13,7 @@
                         <Button @click="filtrar('General')"      label="General"/><br><br>
                         <Button @click="filtrar('Capital')"      label="Neuquen Capital"/><br><br>
                         <Button @click="filtrar('Norte')"        label="Zona Norte"/><br><br>
-                        <Button @click="filtrar('Este')"         label="Zona Este"/><br><br>
+                        <Button @click="filtrar('Oeste')"        label="Zona Oeste"/><br><br>
                         <Button @click="filtrar('Confluencia')"  label="Zona Confluencia"/><br><br>
                         <Button @click="filtrar('Sur')"          label="Zona Sur"/>
                     </div>

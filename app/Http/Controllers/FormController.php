@@ -22,20 +22,59 @@ class FormController extends Controller
     }
 
     public function saveCandidates(Request $r) {
+        $check = Form::where('mesa', $r->mesa)->count();
+        if ($check > 0) {
+            return response()->json([
+                'error' => 'Este formulario ya fue cargado!',
+                'data' => [],
+                'status' => 406
+            ]);
+        }
+
+        $candidatos = Candidate::all();
+        $error = true;
+        $total_cargados = null;
+        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados) {
+            if ($r->input('candidato_'.$candidato->id)) {
+                $error = false;
+                $total_cargados += $r->input('candidato_'.$candidato->id);
+            }
+        });
+
+        if ($error) {
+            return response()->json([
+                'error' => 'No tiene votos cargados!',
+                'data' => [],
+                'status' => 406
+            ]);
+        }
+
+        if ($r->total < $total_cargados) {
+            return response()->json([
+                'error' => 'El total de votos es mayor al total del padron!',
+                'data' => [],
+                'status' => 406
+            ]);
+        }
+
         $form = Form::create([
             'circuito' => $r->circuito,
             'mesa' => $r->mesa,
             'total_votantes' => $r->total,
         ]);
         $form->save();
-        $candidatos = Candidate::all();
         $candidatos->map(function($candidato) use ($r, $form) {
             Vote::insert([
-                'cantidad' => $r->input('candidato_'.$candidato->id),
+                'cantidad' => $r->input('candidato_'.$candidato->id) ? $r->input('candidato_'.$candidato->id) : 0,
                 'formulario_id' => $form->id,
                 'candidato_id' => $candidato->id,
             ]);
         });
+        return response()->json([
+            'error' => '',
+            'data' => [],
+            'status' => 201
+        ]);
     }
 
     public function getVotes(Request $r) {
@@ -49,28 +88,8 @@ class FormController extends Controller
             case 'Confluencia':
                 return $this->getByForm(100, 190);
             break;
-            case 'Este':
-                $colors = ['#C0392B','#C0392B','#F1948A','#9B59B6','#BB8FCE','#2980B9','#AED6F1','#148F77','#A3E4D7','#B7950B','#F39C12','#D35400','#34495E','#F0B27A','#9C640C','#D5DBDB',];
-                $candidatos = Candidate::select('id', 'nombre')->get();
-                $res = [];
-                foreach ($candidatos as $candidato) {
-                    $forms_a=Form::where('circuito', '>=', 200)->where('circuito', '<=', 290);
-                    $forms=Form::where('circuito', '>=', 900)->where('circuito', '<=', 920)->union($forms_a)->get();
-                    $votos=0;
-                    $forms->map(function($form) use (&$votos, $candidato) {
-                        $votos += Vote::
-                            where('formulario_id', $form->id)->
-                            where('candidato_id', $candidato->id)->
-                            first()->
-                            cantidad;
-                    });
-                    array_push($res, [
-                        'nombre' => $candidato->nombre,
-                        'votos' => $votos,
-                        'color' => $colors[$candidato->id],
-                    ]);
-                }
-                return $res;
+            case 'Oeste':
+                return $this->getByForm(200, 290, 900, 920);
             break;
             case 'Norte':
                 return $this->getByForm(300, 860);
@@ -81,12 +100,24 @@ class FormController extends Controller
         }
     }
 
-    private function getByForm($desde, $hasta) {
-        $colors = ['#C0392B','#C0392B','#F1948A','#9B59B6','#BB8FCE','#2980B9','#AED6F1','#148F77','#A3E4D7','#B7950B','#F39C12','#D35400','#34495E','#F0B27A','#9C640C','#D5DBDB',];
-        $candidatos = Candidate::select('id', 'nombre')->get();
-        $res = [];
-        foreach ($candidatos as $candidato) {
+    private function getByForm($desde, $hasta, $desde2 = null, $hasta2 = null) {
+        $candidatos = Candidate::select('id', 'color', 'nombre')->where('id', '<=', 13)->get();
+        $forms = [];
+        if ($desde2) {
+            $forms_a=Form::where('circuito', '>=', $desde)->where('circuito', '<=', $hasta);
+            $forms=Form::where('circuito', '>=', $desde2)->where('circuito', '<=', $hasta2)->union($forms_a)->get();
+        }else{
             $forms=Form::where('circuito', '>=', $desde)->where('circuito', '<=', $hasta)->get();
+        }
+        $res = [];
+        $votos_totales=0;
+        $forms->map(function($form) use (&$votos_totales) {
+            $votos_del_form = Vote::where('formulario_id', $form->id)->get();
+            $votos_del_form->map(function($voto) use (&$votos_totales) {
+                $votos_totales += $voto->cantidad;
+            });
+        });
+        foreach ($candidatos as $candidato) {
             $votos=0;
             $forms->map(function($form) use (&$votos, $candidato) {
                 $votos += Vote::
@@ -97,8 +128,8 @@ class FormController extends Controller
             });
             array_push($res, [
                 'nombre' => $candidato->nombre,
-                'votos' => $votos,
-                'color' => $colors[$candidato->id],
+                'votos' => $votos/$votos_totales * 100,
+                'color' => $candidato->color,
             ]);
         }
         return $res;

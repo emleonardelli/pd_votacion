@@ -17,6 +17,7 @@ class CreateCandidatesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('lista');
+            $table->string('color');
             $table->string('partido')->nullable();
             $table->string('partido_sigla');
             $table->string('nombre');

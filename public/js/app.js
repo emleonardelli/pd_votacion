@@ -21105,6 +21105,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var primevue_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/button */ "./node_modules/primevue/button/button.esm.js");
 /* harmony import */ var primevue_inputtext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/inputtext */ "./node_modules/primevue/inputtext/inputtext.esm.js");
+/* harmony import */ var primevue_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! primevue/toast */ "./node_modules/primevue/toast/toast.esm.js");
+
 
 
 
@@ -21120,6 +21122,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     save: function save() {
+      var _this = this;
+
       var model = {
         circuito: document.getElementById('circuito').value,
         mesa: document.getElementById('mesa').value,
@@ -21129,14 +21133,32 @@ __webpack_require__.r(__webpack_exports__);
         model["candidato_".concat(candidate.id)] = document.getElementById("candidato_".concat(candidate.id)).value;
       });
       axios.post('/api/saveCandidates', model).then(function (res) {
-        console.log(res);
+        if (res.data.status == 406) {
+          _this.$toast.add({
+            severity: 'error',
+            summary: 'Error!',
+            detail: res.data.error,
+            life: 3000
+          });
+        } else {
+          _this.$toast.add({
+            severity: 'success',
+            summary: 'Operación Exitosa',
+            detail: 'Formulario guardado',
+            life: 1000
+          });
+
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
+        }
       });
     },
     getCandidates: function getCandidates() {
-      var _this = this;
+      var _this2 = this;
 
       return axios.get('/api/getCandidates').then(function (data) {
-        return _this.candidates = data.data;
+        return _this2.candidates = data.data;
       });
     }
   },
@@ -21144,7 +21166,8 @@ __webpack_require__.r(__webpack_exports__);
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head,
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
     Button: primevue_button__WEBPACK_IMPORTED_MODULE_2__["default"],
-    InputText: primevue_inputtext__WEBPACK_IMPORTED_MODULE_3__["default"]
+    InputText: primevue_inputtext__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Toast: primevue_toast__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 }));
 
@@ -24947,9 +24970,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         label: "Zona Norte"
       }), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         onClick: _cache[3] || (_cache[3] = function ($event) {
-          return _ctx.filtrar('Este');
+          return _ctx.filtrar('Oeste');
         }),
-        label: "Zona Este"
+        label: "Zona Oeste"
       }), _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         onClick: _cache[4] || (_cache[4] = function ($event) {
           return _ctx.filtrar('Confluencia');
@@ -25081,13 +25104,15 @@ var _hoisted_16 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
+  var _component_Toast = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Toast");
+
   var _component_InputText = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputText");
 
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Elecciones 2021"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
     style: {
       "width": "50%",
       "float": "left",
@@ -25328,7 +25353,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-gray-100[data-v-317d1a6e] {\n        background-color: #f7fafc;\n        background-color: rgba(247, 250, 252, var(--tw-bg-opacity));\n}\n.border-gray-200[data-v-317d1a6e] {\n        border-color: #edf2f7;\n        border-color: rgba(237, 242, 247, var(--tw-border-opacity));\n}\n.text-gray-400[data-v-317d1a6e] {\n        color: #cbd5e0;\n        color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n.text-gray-500[data-v-317d1a6e] {\n        color: #a0aec0;\n        color: rgba(160, 174, 192, var(--tw-text-opacity));\n}\n.text-gray-600[data-v-317d1a6e] {\n        color: #718096;\n        color: rgba(113, 128, 150, var(--tw-text-opacity));\n}\n.text-gray-700[data-v-317d1a6e] {\n        color: #4a5568;\n        color: rgba(74, 85, 104, var(--tw-text-opacity));\n}\n.text-gray-900[data-v-317d1a6e] {\n        color: #1a202c;\n        color: rgba(26, 32, 44, var(--tw-text-opacity));\n}\n@media (prefers-color-scheme: dark) {\n.dark\\:bg-gray-800[data-v-317d1a6e] {\n            background-color: #2d3748;\n            background-color: rgba(45, 55, 72, var(--tw-bg-opacity));\n}\n.dark\\:bg-gray-900[data-v-317d1a6e] {\n            background-color: #1a202c;\n            background-color: rgba(26, 32, 44, var(--tw-bg-opacity));\n}\n.dark\\:border-gray-700[data-v-317d1a6e] {\n            border-color: #4a5568;\n            border-color: rgba(74, 85, 104, var(--tw-border-opacity));\n}\n.dark\\:text-white[data-v-317d1a6e] {\n            color: #fff;\n            color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n.dark\\:text-gray-400[data-v-317d1a6e] {\n            color: #cbd5e0;\n            color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-gray-100[data-v-317d1a6e] {\n        background-color: #f7fafc;\n        background-color: rgba(247, 250, 252, var(--tw-bg-opacity));\n}\n.border-gray-200[data-v-317d1a6e] {\n        border-color: #edf2f7;\n        border-color: rgba(237, 242, 247, var(--tw-border-opacity));\n}\n.text-gray-400[data-v-317d1a6e] {\n        color: #cbd5e0;\n        color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n.text-gray-500[data-v-317d1a6e] {\n        color: #a0aec0;\n        color: rgba(160, 174, 192, var(--tw-text-opacity));\n}\n.text-gray-600[data-v-317d1a6e] {\n        color: #718096;\n        color: rgba(113, 128, 150, var(--tw-text-opacity));\n}\n.text-gray-700[data-v-317d1a6e] {\n        color: #4a5568;\n        color: rgba(74, 85, 104, var(--tw-text-opacity));\n}\n.text-gray-900[data-v-317d1a6e] {\n        color: #1a202c;\n        color: rgba(26, 32, 44, var(--tw-text-opacity));\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48905,6 +48930,340 @@ const Ripple = {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Ripple);
+
+
+/***/ }),
+
+/***/ "./node_modules/primevue/toast/toast.esm.js":
+/*!**************************************************!*\
+  !*** ./node_modules/primevue/toast/toast.esm.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var primevue_toasteventbus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! primevue/toasteventbus */ "./node_modules/primevue/toasteventbus/toasteventbus.esm.js");
+/* harmony import */ var primevue_ripple__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primevue/ripple */ "./node_modules/primevue/ripple/ripple.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var primevue_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/utils */ "./node_modules/primevue/utils/utils.esm.js");
+
+
+
+
+
+var script$1 = {
+    name: 'ToastMessage',
+    emits: ['close'],
+    props: {
+        message: null,
+        template: null
+    },
+    closeTimeout: null,
+    mounted() {
+        if (this.message.life) {
+            this.closeTimeout = setTimeout(() => {
+                this.close();
+            }, this.message.life);
+        }
+    },
+    beforeUnmount() {
+        this.clearCloseTimeout();
+    },
+    methods: {
+        close() {
+            this.$emit('close', this.message);
+        },
+        onCloseClick() {
+            this.clearCloseTimeout();
+            this.close();
+        },
+        clearCloseTimeout() {
+            if (this.closeTimeout) {
+                clearTimeout(this.closeTimeout);
+                this.closeTimeout = null;
+            }
+        }
+    },
+    computed: {
+        containerClass() {
+            return ['p-toast-message', this.message.styleClass, {
+                'p-toast-message-info': this.message.severity === 'info',
+                'p-toast-message-warn': this.message.severity === 'warn',
+                'p-toast-message-error': this.message.severity === 'error',
+                'p-toast-message-success': this.message.severity === 'success'
+            }];
+        },
+        iconClass() {
+            return ['p-toast-message-icon pi', {
+                'pi-info-circle': this.message.severity === 'info',
+                'pi-exclamation-triangle': this.message.severity === 'warn',
+                'pi-times': this.message.severity === 'error',
+                'pi-check': this.message.severity === 'success'
+            }];
+        }
+    },
+    directives: {
+        'ripple': primevue_ripple__WEBPACK_IMPORTED_MODULE_1__["default"]
+    }
+};
+
+const _hoisted_1 = { class: "p-toast-message-text" };
+const _hoisted_2 = { class: "p-toast-summary" };
+const _hoisted_3 = { class: "p-toast-detail" };
+const _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)("span", { class: "p-toast-icon-close-icon pi pi-times" }, null, -1);
+
+function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  const _directive_ripple = (0,vue__WEBPACK_IMPORTED_MODULE_2__.resolveDirective)("ripple");
+
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_2__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_2__.createBlock)("div", {
+    class: $options.containerClass,
+    role: "alert",
+    "aria-live": "assertive",
+    "aria-atomic": "true"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)("div", {
+      class: ["p-toast-message-content", $props.message.contentStyleClass]
+    }, [
+      (!$props.template)
+        ? ((0,vue__WEBPACK_IMPORTED_MODULE_2__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_2__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_2__.Fragment, { key: 0 }, [
+            (0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)("span", { class: $options.iconClass }, null, 2),
+            (0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)("div", _hoisted_1, [
+              (0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_2__.toDisplayString)($props.message.summary), 1),
+              (0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_2__.toDisplayString)($props.message.detail), 1)
+            ])
+          ], 64))
+        : ((0,vue__WEBPACK_IMPORTED_MODULE_2__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_2__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_2__.resolveDynamicComponent)($props.template), {
+            key: 1,
+            message: $props.message
+          }, null, 8, ["message"])),
+      ($props.message.closable !== false)
+        ? (0,vue__WEBPACK_IMPORTED_MODULE_2__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_2__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_2__.createBlock)("button", {
+            key: 2,
+            class: "p-toast-icon-close p-link",
+            onClick: _cache[1] || (_cache[1] = (...args) => ($options.onCloseClick && $options.onCloseClick(...args))),
+            type: "button"
+          }, [
+            _hoisted_4
+          ], 512)), [
+            [_directive_ripple]
+          ])
+        : (0,vue__WEBPACK_IMPORTED_MODULE_2__.createCommentVNode)("", true)
+    ], 2)
+  ], 2))
+}
+
+script$1.render = render$1;
+
+var messageIdx = 0;
+
+var script = {
+    name: 'Toast',
+    inheritAttrs: false,
+    props: {
+        group: {
+            type: String,
+            default: null
+        },
+        position: {
+            type: String,
+            default: 'top-right'
+        },
+        autoZIndex: {
+            type: Boolean,
+            default: true
+        },
+        baseZIndex: {
+            type: Number,
+            default: 0
+        },
+        breakpoints: {
+            type: Object,
+            default: null
+        }
+    },
+    data() {
+        return {
+            messages: []
+        }
+    },
+    styleElement: null,
+    mounted() {
+        primevue_toasteventbus__WEBPACK_IMPORTED_MODULE_0__["default"].on('add', this.onAdd);
+        primevue_toasteventbus__WEBPACK_IMPORTED_MODULE_0__["default"].on('remove-group', this.onRemoveGroup);
+        primevue_toasteventbus__WEBPACK_IMPORTED_MODULE_0__["default"].on('remove-all-groups', this.onRemoveAllGroups);
+
+        if (this.breakpoints) {
+            this.createStyle();
+        }
+    },
+    beforeUnmount() {
+        this.destroyStyle();
+
+        if (this.$refs.container && this.autoZIndex) {
+            primevue_utils__WEBPACK_IMPORTED_MODULE_3__.ZIndexUtils.clear(this.$refs.container);
+        }
+
+        primevue_toasteventbus__WEBPACK_IMPORTED_MODULE_0__["default"].off('add', this.onAdd);
+        primevue_toasteventbus__WEBPACK_IMPORTED_MODULE_0__["default"].off('remove-group', this.onRemoveGroup);
+        primevue_toasteventbus__WEBPACK_IMPORTED_MODULE_0__["default"].off('remove-all-groups', this.onRemoveAllGroups);
+    },
+    methods: {
+        add(message) {
+            if (message.id == null) {
+                message.id = messageIdx++;
+            }
+
+            this.messages = [...this.messages, message];
+        },
+        remove(message) {
+            let index = -1;
+            for (let i = 0; i < this.messages.length; i++) {
+                if (this.messages[i] === message) {
+                    index = i;
+                    break;
+                }
+            }
+
+            this.messages.splice(index, 1);
+        },
+        onAdd(message) {
+            if (this.group == message.group) {
+                this.add(message);
+            }
+        },
+        onRemoveGroup(group) {
+            if (this.group === group) {
+                this.messages = [];
+            }
+        },
+        onRemoveAllGroups() {
+            this.messages = [];
+        },
+        onEnter() {
+            this.$refs.container.setAttribute(this.attributeSelector, '');
+
+            if (this.autoZIndex) {
+                primevue_utils__WEBPACK_IMPORTED_MODULE_3__.ZIndexUtils.set('modal', this.$refs.container, this.baseZIndex || this.$primevue.config.zIndex.modal);
+            }
+        },
+        onLeave() {
+            if (this.$refs.container && this.autoZIndex) {
+                primevue_utils__WEBPACK_IMPORTED_MODULE_3__.ZIndexUtils.clear(this.$refs.container);
+            }
+        },
+        createStyle() {
+            if (!this.styleElement) {
+                this.styleElement = document.createElement('style');
+                this.styleElement.type = 'text/css';
+                document.head.appendChild(this.styleElement);
+
+                let innerHTML = '';
+                for (let breakpoint in this.breakpoints) {
+                    let breakpointStyle = '';
+                    for (let styleProp in this.breakpoints[breakpoint]) {
+                        breakpointStyle += styleProp + ':' + this.breakpoints[breakpoint][styleProp] + '!important;';
+                    }
+                    innerHTML += `
+                        @media screen and (max-width: ${breakpoint}) {
+                            .p-toast[${this.attributeSelector}] {
+                                ${breakpointStyle}
+                            }
+                        }
+                    `;
+                }
+
+                this.styleElement.innerHTML = innerHTML;
+            }
+        },
+        destroyStyle() {
+            if (this.styleElement) {
+                document.head.removeChild(this.styleElement);
+                this.styleElement = null;
+            }
+        }
+    },
+    components: {
+        'ToastMessage': script$1
+    },
+    computed: {
+        containerClass() {
+            return ['p-toast p-component p-toast-' + this.position, {
+                'p-input-filled': this.$primevue.config.inputStyle === 'filled',
+                'p-ripple-disabled': this.$primevue.config.ripple === false
+            }];
+        },
+        attributeSelector() {
+            return (0,primevue_utils__WEBPACK_IMPORTED_MODULE_3__.UniqueComponentId)();
+        }
+    }
+};
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_ToastMessage = (0,vue__WEBPACK_IMPORTED_MODULE_2__.resolveComponent)("ToastMessage");
+
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_2__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_2__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_2__.Teleport, { to: "body" }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)("div", (0,vue__WEBPACK_IMPORTED_MODULE_2__.mergeProps)({
+      ref: "container",
+      class: $options.containerClass
+    }, _ctx.$attrs), [
+      (0,vue__WEBPACK_IMPORTED_MODULE_2__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_2__.TransitionGroup, {
+        name: "p-toast-message",
+        tag: "div",
+        onEnter: $options.onEnter,
+        onLeave: $options.onLeave
+      }, {
+        default: (0,vue__WEBPACK_IMPORTED_MODULE_2__.withCtx)(() => [
+          ((0,vue__WEBPACK_IMPORTED_MODULE_2__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_2__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_2__.renderList)($data.messages, (msg) => {
+            return ((0,vue__WEBPACK_IMPORTED_MODULE_2__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_2__.createBlock)(_component_ToastMessage, {
+              key: msg.id,
+              message: msg,
+              onClose: _cache[1] || (_cache[1] = $event => ($options.remove($event))),
+              template: _ctx.$slots.message
+            }, null, 8, ["message", "template"]))
+          }), 128))
+        ]),
+        _: 1
+      }, 8, ["onEnter", "onLeave"])
+    ], 16)
+  ]))
+}
+
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = "\n.p-toast {\n    position: fixed;\n    width: 25rem;\n}\n.p-toast-message-content {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n}\n.p-toast-message-text {\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto;\n}\n.p-toast-top-right {\n\ttop: 20px;\n\tright: 20px;\n}\n.p-toast-top-left {\n\ttop: 20px;\n\tleft: 20px;\n}\n.p-toast-bottom-left {\n\tbottom: 20px;\n\tleft: 20px;\n}\n.p-toast-bottom-right {\n\tbottom: 20px;\n\tright: 20px;\n}\n.p-toast-top-center {\n\ttop: 20px;\n    left: 50%;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n}\n.p-toast-bottom-center {\n\tbottom: 20px;\n    left: 50%;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n}\n.p-toast-center {\n\tleft: 50%;\n\ttop: 50%;\n    min-width: 20vw;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n}\n.p-toast-icon-close {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    overflow: hidden;\n    position: relative;\n}\n.p-toast-icon-close.p-link {\n\tcursor: pointer;\n}\n\n/* Animations */\n.p-toast-message-enter-from {\n    opacity: 0;\n    -webkit-transform: translateY(50%);\n    transform: translateY(50%);\n}\n.p-toast-message-leave-from {\n    max-height: 1000px;\n}\n.p-toast .p-toast-message.p-toast-message-leave-to {\n    max-height: 0;\n    opacity: 0;\n    margin-bottom: 0;\n    overflow: hidden;\n}\n.p-toast-message-enter-active {\n    -webkit-transition: transform .3s, opacity .3s;\n    -webkit-transition: opacity .3s, -webkit-transform .3s;\n    transition: opacity .3s, -webkit-transform .3s;\n    transition: transform .3s, opacity .3s;\n    transition: transform .3s, opacity .3s, -webkit-transform .3s;\n}\n.p-toast-message-leave-active {\n    -webkit-transition: max-height .45s cubic-bezier(0, 1, 0, 1), opacity .3s, margin-bottom .3s;\n    transition: max-height .45s cubic-bezier(0, 1, 0, 1), opacity .3s, margin-bottom .3s;\n}\n";
+styleInject(css_248z);
+
+script.render = render;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (script);
 
 
 /***/ }),
