@@ -21066,8 +21066,9 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       },
-      invalidos: 0,
-      mesas: 0
+      nulos: 0,
+      mesas: 0,
+      asistencia: 0
     };
   },
   mounted: function mounted() {
@@ -21094,8 +21095,9 @@ __webpack_require__.r(__webpack_exports__);
           datasets: [dataset]
         };
         _this.chartData = chartData;
-        _this.invalidos = data.data.votos_invalidos;
-        _this.mesas = data.data.porcentaje_mesas;
+        _this.nulos = data.data.votos_nulos;
+        _this.mesas = data.data.mesas_computadas;
+        _this.asistencia = data.data.asistencia;
       });
     },
     filtrar: function filtrar(filter) {
@@ -24973,7 +24975,8 @@ var _hoisted_19 = {
 var _hoisted_20 = ["textContent"];
 var _hoisted_21 = {
   style: {
-    "width": "100%"
+    "width": "100%",
+    "text-align": "center"
   }
 };
 var _hoisted_22 = {
@@ -24984,10 +24987,14 @@ var _hoisted_22 = {
   }
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Votos invalidos: ");
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
 
-var _hoisted_24 = ["innerHTML"];
-var _hoisted_25 = {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_25 = ["innerHTML"];
+var _hoisted_26 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -24995,9 +25002,28 @@ var _hoisted_25 = {
   }
 };
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de Mesas: ");
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
 
-var _hoisted_27 = ["innerHTML"];
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_29 = ["innerHTML"];
+var _hoisted_30 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_33 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
@@ -25059,21 +25085,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         options: _ctx.options
       }, null, 8
       /* PROPS */
-      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-        innerHTML: _ctx.invalidos,
+      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.asistencia,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_24)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , _hoisted_25)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.nulos,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_29)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.mesas,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_27)])])])])])])])])];
+      , _hoisted_33)])])])])])])])])];
     }),
     _: 1
     /* STABLE */
@@ -25215,7 +25248,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "margin-bottom": "10px"
     },
     id: "total",
-    type: "number"
+    type: "number",
+    value: "330"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidates, function (candidate) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: candidate,

@@ -24,16 +24,20 @@
                             :type="type"
                             :data="chartData"
                             :options="options"/>
-                        <table style="width: 100%;">
+                        <table style="width: 100%; text-align: center">
                             <tr>
                                 <td>
                                     <div style="padding: 15px;border: 1px solid black; border-radius: 10px">
-                                        Votos invalidos: <span v-html="invalidos" style="font-weight: bold"></span>
+                                        Porcentaje de asistencia<br><span v-html="asistencia" style="font-weight: bold"></span>
+                                    </div>
+                                </td><td>
+                                    <div style="padding: 15px;border: 1px solid black; border-radius: 10px">
+                                        Blancos y Nulos<br><span v-html="nulos" style="font-weight: bold"></span>
                                     </div>
                                 </td>
                                 <td>
                                     <div style="padding: 15px;border: 1px solid black; border-radius: 10px">
-                                        Porcentaje de Mesas: <span v-html="mesas" style="font-weight: bold"></span>
+                                        Mesas computadas<br><span v-html="mesas" style="font-weight: bold"></span>
                                     </div>
                                 </td>
                             </tr>
@@ -80,8 +84,9 @@
                         },
                     }
                 },
-                invalidos: 0,
+                nulos: 0,
                 mesas: 0,
+                asistencia: 0,
             }
         },
         mounted() {
@@ -106,8 +111,9 @@
                         datasets: [dataset]
                     }
                     this.chartData = chartData;
-                    this.invalidos = data.data.votos_invalidos;
-                    this.mesas = data.data.porcentaje_mesas;
+                    this.nulos = data.data.votos_nulos;
+                    this.mesas = data.data.mesas_computadas;
+                    this.asistencia = data.data.asistencia;
                 });
             },
             filtrar(filter) {

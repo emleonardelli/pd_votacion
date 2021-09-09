@@ -159,17 +159,30 @@ class FormController extends Controller
             });
         });
 
-        //porcentaje de mesas
+        //mesas computadas
         $mesas_total=$this->cantidad_de_mesas[$zona];
         $mesas = 0;
         $forms->map(function($form) use (&$mesas) {
             $mesas++;
         });
 
+        //porcentaje de asistencia
+        $asistencia_total=0;
+        $asistencia = 0;
+        $forms->map(function($form) use (&$asistencia_total, &$asistencia) {
+            $asistencia_total+= $form->total_votantes;
+            
+            $votos = Vote::where('formulario_id', $form->id)->get();
+            $votos->map(function($voto) use (&$asistencia) {
+                $asistencia += $voto->cantidad;
+            });
+        });
+
         return [
             'grafico' => $res,
-            'votos_invalidos' => '%'.number_format($votos_invalidos / $votos_totales * 100, 2, ',', '.'),
-            'porcentaje_mesas' => '%'.number_format($mesas / $mesas_total * 100, 2, ',', '.'). " ($mesas de $mesas_total)",
+            'votos_nulos' => number_format($votos_invalidos / $votos_totales * 100, 2, ',', '.'). ' %',
+            'mesas_computadas' => number_format($mesas / $mesas_total * 100, 2, ',', '.'). " % ($mesas de $mesas_total)",
+            'asistencia' => number_format($asistencia / $asistencia_total * 100, 2, ',', '.'). " % ($asistencia de $asistencia_total)",
         ];
     }
 
