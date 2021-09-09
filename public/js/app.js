@@ -21147,7 +21147,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var model = {
-        circuito: document.getElementById('circuito').value,
         mesa: document.getElementById('mesa').value,
         total: document.getElementById('total').value
       };
@@ -25171,8 +25170,8 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
     "width": "50%",
     "float": "left"
   },
-  "for": "circuito"
-}, "Circuito N°", -1
+  "for": "mesa"
+}, "Mesa N°", -1
 /* HOISTED */
 );
 
@@ -25185,30 +25184,16 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
     "width": "50%",
     "float": "left"
   },
-  "for": "mesa"
-}, "Mesa N°", -1
-/* HOISTED */
-);
-
-var _hoisted_12 = {
-  "class": "p-field"
-};
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  style: {
-    "width": "50%",
-    "float": "left"
-  },
   "for": "total"
 }, "Total Votantes Empadronados", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_12 = {
   "class": "p-fluid"
 };
-var _hoisted_15 = ["for", "textContent"];
-var _hoisted_16 = {
+var _hoisted_13 = ["for", "textContent"];
+var _hoisted_14 = {
   "class": "mt-2 text-center text-gray-600 dark:text-gray-400 text-sm"
 };
 
@@ -25231,17 +25216,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "float": "left",
       "margin-bottom": "10px"
     },
-    id: "circuito",
-    type: "number"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
-    style: {
-      "width": "50%",
-      "float": "left",
-      "margin-bottom": "10px"
-    },
     id: "mesa",
     type: "number"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
     style: {
       "width": "50%",
       "float": "left",
@@ -25250,7 +25227,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "total",
     type: "number",
     value: "330"
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidates, function (candidate) {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidates, function (candidate) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: candidate,
       "class": "p-field"
@@ -25263,7 +25240,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(candidate.titulo)
     }, null, 8
     /* PROPS */
-    , _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    , _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
       style: {
         "width": "30%",
         "float": "left",
@@ -25276,7 +25253,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["id"])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
     "class": "p-button-lg",
     label: "Guardar",
     onClick: _cache[0] || (_cache[0] = function ($event) {

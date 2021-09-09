@@ -69,7 +69,6 @@ class FormController extends Controller
         }
 
         $form = Form::create([
-            'circuito' => $r->circuito,
             'mesa' => $r->mesa,
             'total_votantes' => $r->total,
         ]);
@@ -91,22 +90,22 @@ class FormController extends Controller
     public function getVotes(Request $r) {
         switch ($r->filter) {
             case 'Provincial':
-                return $this->getByForm('Provincial', 0, 1650);
+                return $this->getByForm('Provincial', 0, 1597);
             break;
             case 'Capital':
-                return $this->getByForm('Capital', 01, 89);
+                return $this->getByForm('Capital', 1, 629);
             break;
             case 'Confluencia':
-                return $this->getByForm('Confluencia', 100, 190);
+                return $this->getByForm('Confluencia', 630, 989);
             break;
             case 'Oeste':
-                return $this->getByForm('Oeste', 200, 290, 900, 920);
+                return $this->getByForm('Oeste', 1001, 1086, 1325, 1339);
             break;
             case 'Norte':
-                return $this->getByForm('Norte', 300, 860);
+                return $this->getByForm('Norte', 1104, 1316);
             break;
             case 'Sur':
-                return $this->getByForm('Sur', 1000, 1650);
+                return $this->getByForm('Sur', 1348, 1597);
             break;
         }
     }
@@ -115,10 +114,10 @@ class FormController extends Controller
         $candidatos = Candidate::select('id', 'color', 'nombre')->where('id', '<=', 13)->get();
         $forms = [];
         if ($desde2) {
-            $forms_a=Form::where('circuito', '>=', $desde)->where('circuito', '<=', $hasta);
-            $forms=Form::where('circuito', '>=', $desde2)->where('circuito', '<=', $hasta2)->union($forms_a)->get();
+            $forms_a=Form::where('mesa', '>=', $desde)->where('mesa', '<=', $hasta);
+            $forms=Form::where('mesa', '>=', $desde2)->where('mesa', '<=', $hasta2)->union($forms_a)->get();
         }else{
-            $forms=Form::where('circuito', '>=', $desde)->where('circuito', '<=', $hasta)->get();
+            $forms=Form::where('mesa', '>=', $desde)->where('mesa', '<=', $hasta)->get();
         }
         $res = [];
         $votos_totales=0;
