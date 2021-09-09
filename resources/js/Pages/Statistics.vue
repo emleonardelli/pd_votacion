@@ -2,7 +2,7 @@
     <app-layout title="Elecciones 2021">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Estadisticas
+                Resultado conteo estadístico
             </h2>
         </template>
 
@@ -10,18 +10,20 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                     <div style="width: 20%; float: left; margin-bottom: 10px">
-                        <Button @click="filtrar('General')"      label="General"/><br><br>
+                        <Button @click="filtrar('Provincial')"      label="Provincial"/><br><br>
                         <Button @click="filtrar('Capital')"      label="Neuquen Capital"/><br><br>
                         <Button @click="filtrar('Norte')"        label="Zona Norte"/><br><br>
                         <Button @click="filtrar('Oeste')"        label="Zona Oeste"/><br><br>
                         <Button @click="filtrar('Confluencia')"  label="Zona Confluencia"/><br><br>
-                        <Button @click="filtrar('Sur')"          label="Zona Sur"/>
+                        <Button @click="filtrar('Sur')"          label="Zona Sur"/><br><br><br>
+                        <Button @click="exportar()"              label="Exportar a CSV" class="p-button-warning"/>
                     </div>
                     <div style="width: 80%; float: left; margin-bottom: 10px">
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="filter"></h2>
                         <Chart
                             :type="type"
-                            :data="chartData"/>
+                            :data="chartData"
+                            :options="options"/>
                     </div>
                 </div>
             </div>
@@ -44,16 +46,26 @@
         data() {
             return {
                 type: 'bar', //bar, pie, doughnut
-                filter: 'General',
+                filter: 'Provincial',
                 chartData: {
                     labels: [],
-                    datasets: [
-                        {
-                            data: [],
-                            backgroundColor: [],
-                        }
-                    ]
+                    datasets: []
                 },
+                options: {
+                    scales: {
+                        y: {
+                            title: {
+                                display: true, 
+                                text: 'Porcentaje',
+                            },
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return '%' + value;
+                                }
+                            }
+                        },
+                    }
+                }
             }
         },
         mounted() {
@@ -64,6 +76,7 @@
                 return axios.get(`/api/getVotes/${this.filter}`).then((data) => {
                     let labels = [];
                     let dataset = {
+                        label: 'Candidatos',
                         data: [],
                         backgroundColor: [],
                     }
@@ -83,6 +96,9 @@
                 this.filter=filter;
                 this.getVotes();
             },
+            exportar() {
+                window.open('/api/exportar', '_blank');
+            }
         },
     })
 </script>

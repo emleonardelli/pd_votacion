@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VotesExport;
 use App\Models\Candidate;
 use App\Models\Form;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FormController extends Controller
 {
@@ -79,7 +81,7 @@ class FormController extends Controller
 
     public function getVotes(Request $r) {
         switch ($r->filter) {
-            case 'General':
+            case 'Provincial':
                 return $this->getByForm(0, 1650);
             break;
             case 'Capital':
@@ -133,6 +135,10 @@ class FormController extends Controller
             ]);
         }
         return $res;
+    }
+
+    public function exportar() {
+        return Excel::download(new VotesExport, 'Votos.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
 }

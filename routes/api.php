@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/getCandidates', [FormController::class, 'getCandidates']);
 Route::post('/saveCandidates', [FormController::class, 'saveCandidates']);
 Route::get('/getVotes/{filter}', [FormController::class, 'getVotes']);
+Route::get('/exportar', [FormController::class, 'exportar'])->name('exportar');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

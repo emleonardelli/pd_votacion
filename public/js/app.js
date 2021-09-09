@@ -21046,13 +21046,25 @@ __webpack_require__.r(__webpack_exports__);
     return {
       type: 'bar',
       //bar, pie, doughnut
-      filter: 'General',
+      filter: 'Provincial',
       chartData: {
         labels: [],
-        datasets: [{
-          data: [],
-          backgroundColor: []
-        }]
+        datasets: []
+      },
+      options: {
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Porcentaje'
+            },
+            ticks: {
+              callback: function callback(value, index, values) {
+                return '%' + value;
+              }
+            }
+          }
+        }
       }
     };
   },
@@ -21066,6 +21078,7 @@ __webpack_require__.r(__webpack_exports__);
       return axios.get("/api/getVotes/".concat(this.filter)).then(function (data) {
         var labels = [];
         var dataset = {
+          label: 'Candidatos',
           data: [],
           backgroundColor: []
         };
@@ -21084,6 +21097,9 @@ __webpack_require__.r(__webpack_exports__);
     filtrar: function filtrar(filter) {
       this.filter = filter;
       this.getVotes();
+    },
+    exportar: function exportar() {
+      window.open('/api/exportar', '_blank');
     }
   }
 }));
@@ -24870,7 +24886,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " Estadisticas ", -1
+}, " Resultado conteo estadístico ", -1
 /* HOISTED */
 );
 
@@ -24931,14 +24947,26 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_19 = {
   style: {
     "width": "80%",
     "float": "left",
     "margin-bottom": "10px"
   }
 };
-var _hoisted_17 = ["textContent"];
+var _hoisted_20 = ["textContent"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
@@ -24955,9 +24983,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         onClick: _cache[0] || (_cache[0] = function ($event) {
-          return _ctx.filtrar('General');
+          return _ctx.filtrar('Provincial');
         }),
-        label: "General"
+        label: "Provincial"
       }), _hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         onClick: _cache[1] || (_cache[1] = function ($event) {
           return _ctx.filtrar('Capital');
@@ -24983,17 +25011,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return _ctx.filtrar('Sur');
         }),
         label: "Zona Sur"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+      }), _hoisted_16, _hoisted_17, _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        onClick: _cache[6] || (_cache[6] = function ($event) {
+          return _ctx.exportar();
+        }),
+        label: "Exportar a CSV",
+        "class": "p-button-warning"
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
         "class": "font-semibold text-xl text-gray-800 leading-tight",
         textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.filter)
       }, null, 8
       /* PROPS */
-      , _hoisted_17), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
+      , _hoisted_20), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
         type: _ctx.type,
-        data: _ctx.chartData
+        data: _ctx.chartData,
+        options: _ctx.options
       }, null, 8
       /* PROPS */
-      , ["type", "data"])])])])])];
+      , ["type", "data", "options"])])])])])];
     }),
     _: 1
     /* STABLE */
