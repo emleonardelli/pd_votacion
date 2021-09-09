@@ -21065,7 +21065,9 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
         }
-      }
+      },
+      invalidos: 0,
+      mesas: 0
     };
   },
   mounted: function mounted() {
@@ -21082,7 +21084,7 @@ __webpack_require__.r(__webpack_exports__);
           data: [],
           backgroundColor: []
         };
-        data.data.map(function (candidato) {
+        data.data.grafico.map(function (candidato) {
           labels.push(candidato.nombre);
           dataset.data.push(candidato.votos);
           dataset.backgroundColor.push(candidato.color);
@@ -21092,6 +21094,8 @@ __webpack_require__.r(__webpack_exports__);
           datasets: [dataset]
         };
         _this.chartData = chartData;
+        _this.invalidos = data.data.votos_invalidos;
+        _this.mesas = data.data.porcentaje_mesas;
       });
     },
     filtrar: function filtrar(filter) {
@@ -24967,6 +24971,33 @@ var _hoisted_19 = {
   }
 };
 var _hoisted_20 = ["textContent"];
+var _hoisted_21 = {
+  style: {
+    "width": "100%"
+  }
+};
+var _hoisted_22 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Votos invalidos: ");
+
+var _hoisted_24 = ["innerHTML"];
+var _hoisted_25 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de Mesas: ");
+
+var _hoisted_27 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
@@ -25015,7 +25046,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[6] || (_cache[6] = function ($event) {
           return _ctx.exportar();
         }),
-        label: "Exportar a CSV",
+        label: "Exportar a XLS",
         "class": "p-button-warning"
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
         "class": "font-semibold text-xl text-gray-800 leading-tight",
@@ -25028,7 +25059,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         options: _ctx.options
       }, null, 8
       /* PROPS */
-      , ["type", "data", "options"])])])])])];
+      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.invalidos,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_24)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.mesas,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_27)])])])])])])])])];
     }),
     _: 1
     /* STABLE */

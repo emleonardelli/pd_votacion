@@ -11,6 +11,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class FormController extends Controller
 {
+    private $cantidad_de_mesas = [
+        'Provincial'  => 1416,
+        'Capital'     => 629,
+        'Confluencia' => 352,
+        'Oeste'       => 101,
+        'Norte'       => 138,
+        'Sur'         => 196,
+    ];
+
     public function getCandidates() {
         $list = Candidate::select(['id', 'lista', 'partido_sigla', 'nombre'])->orderBy('id', 'ASC')->get();
         $list->map(function($candidate) {
@@ -82,27 +91,27 @@ class FormController extends Controller
     public function getVotes(Request $r) {
         switch ($r->filter) {
             case 'Provincial':
-                return $this->getByForm(0, 1650);
+                return $this->getByForm('Provincial', 0, 1650);
             break;
             case 'Capital':
-                return $this->getByForm(01, 89);
+                return $this->getByForm('Capital', 01, 89);
             break;
             case 'Confluencia':
-                return $this->getByForm(100, 190);
+                return $this->getByForm('Confluencia', 100, 190);
             break;
             case 'Oeste':
-                return $this->getByForm(200, 290, 900, 920);
+                return $this->getByForm('Oeste', 200, 290, 900, 920);
             break;
             case 'Norte':
-                return $this->getByForm(300, 860);
+                return $this->getByForm('Norte', 300, 860);
             break;
             case 'Sur':
-                return $this->getByForm(1000, 1650);
+                return $this->getByForm('Sur', 1000, 1650);
             break;
         }
     }
 
-    private function getByForm($desde, $hasta, $desde2 = null, $hasta2 = null) {
+    private function getByForm($zona, $desde, $hasta, $desde2 = null, $hasta2 = null) {
         $candidatos = Candidate::select('id', 'color', 'nombre')->where('id', '<=', 13)->get();
         $forms = [];
         if ($desde2) {
@@ -114,7 +123,7 @@ class FormController extends Controller
         $res = [];
         $votos_totales=0;
         $forms->map(function($form) use (&$votos_totales) {
-            $votos_del_form = Vote::where('formulario_id', $form->id)->get();
+            $votos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '<=', 13)->get();
             $votos_del_form->map(function($voto) use (&$votos_totales) {
                 $votos_totales += $voto->cantidad;
             });
@@ -134,11 +143,38 @@ class FormController extends Controller
                 'color' => $candidato->color,
             ]);
         }
-        return $res;
+
+        //votos invalidos
+        $votos_totales=0;
+        $votos_invalidos = 0;
+        $forms->map(function($form) use (&$votos_totales, &$votos_invalidos) {
+            $votos_totales_del_form = Vote::where('formulario_id', $form->id)->get();
+            $votos_totales_del_form->map(function($voto) use (&$votos_totales) {
+                $votos_totales += $voto->cantidad;
+            });
+
+            $votos_invalidos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '>', 13)->get();
+            $votos_invalidos_del_form->map(function($voto) use (&$votos_invalidos) {
+                $votos_invalidos += $voto->cantidad;
+            });
+        });
+
+        //porcentaje de mesas
+        $mesas_total=$this->cantidad_de_mesas[$zona];
+        $mesas = 0;
+        $forms->map(function($form) use (&$mesas) {
+            $mesas++;
+        });
+
+        return [
+            'grafico' => $res,
+            'votos_invalidos' => '%'.number_format($votos_invalidos / $votos_totales * 100, 2, ',', '.'),
+            'porcentaje_mesas' => '%'.number_format($mesas / $mesas_total * 100, 2, ',', '.'). " ($mesas de $mesas_total)",
+        ];
     }
 
     public function exportar() {
-        return Excel::download(new VotesExport, 'Votos.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new VotesExport, 'Votos.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
 }

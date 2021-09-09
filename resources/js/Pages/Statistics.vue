@@ -16,7 +16,7 @@
                         <Button @click="filtrar('Oeste')"        label="Zona Oeste"/><br><br>
                         <Button @click="filtrar('Confluencia')"  label="Zona Confluencia"/><br><br>
                         <Button @click="filtrar('Sur')"          label="Zona Sur"/><br><br><br>
-                        <Button @click="exportar()"              label="Exportar a CSV" class="p-button-warning"/>
+                        <Button @click="exportar()"              label="Exportar a XLS" class="p-button-warning"/>
                     </div>
                     <div style="width: 80%; float: left; margin-bottom: 10px">
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="filter"></h2>
@@ -24,6 +24,20 @@
                             :type="type"
                             :data="chartData"
                             :options="options"/>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td>
+                                    <div style="padding: 15px;border: 1px solid black; border-radius: 10px">
+                                        Votos invalidos: <span v-html="invalidos" style="font-weight: bold"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding: 15px;border: 1px solid black; border-radius: 10px">
+                                        Porcentaje de Mesas: <span v-html="mesas" style="font-weight: bold"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -65,7 +79,9 @@
                             }
                         },
                     }
-                }
+                },
+                invalidos: 0,
+                mesas: 0,
             }
         },
         mounted() {
@@ -80,7 +96,7 @@
                         data: [],
                         backgroundColor: [],
                     }
-                    data.data.map(candidato => {
+                    data.data.grafico.map(candidato => {
                         labels.push(candidato.nombre);
                         dataset.data.push(candidato.votos);
                         dataset.backgroundColor.push(candidato.color);
@@ -90,6 +106,8 @@
                         datasets: [dataset]
                     }
                     this.chartData = chartData;
+                    this.invalidos = data.data.votos_invalidos;
+                    this.mesas = data.data.porcentaje_mesas;
                 });
             },
             filtrar(filter) {
