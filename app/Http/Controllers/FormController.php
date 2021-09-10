@@ -69,6 +69,7 @@ class FormController extends Controller
         }
 
         $form = Form::create([
+            'circuito' => $r->circuito,
             'mesa' => $r->mesa,
             'total_votantes' => $r->total,
         ]);
