@@ -12,12 +12,15 @@ use Maatwebsite\Excel\Facades\Excel;
 class FormController extends Controller
 {
     private $cantidad_de_mesas = [
-        'Provincial'  => 1416,
-        'Capital'     => 629,
-        'Confluencia' => 352,
-        'Oeste'       => 101,
-        'Norte'       => 138,
-        'Sur'         => 196,
+        'Provincial'         => 241,
+        'Valle_Inferior'     => 28,
+        'Atlantico'          => 15,
+        'Linea_Sur'          => 7,
+        'Cordillera'         => 56,
+        'Valle_Medio'        => 18,
+        'Alto_Valle_Este'    => 16,
+        'Alto_Valle_Centro'  => 48,
+        'Alto_Valle_Oeste'   => 53,
     ];
 
     public function getCandidates() {
@@ -90,28 +93,37 @@ class FormController extends Controller
     public function getVotes(Request $r) {
         switch ($r->filter) {
             case 'Provincial':
-                return $this->getByForm('Provincial', 0, 1597);
+                return $this->getByForm('Provincial', 0, 1689);
             break;
-            case 'Capital':
-                return $this->getByForm('Capital', 1, 629);
+            case 'Valle_Inferior':
+                return $this->getByForm('Valle_Inferior', 1, 190);
             break;
-            case 'Confluencia':
-                return $this->getByForm('Confluencia', 630, 989);
+            case 'Atlantico':
+                return $this->getByForm('Atlantico', 191, 290);
             break;
-            case 'Oeste':
-                return $this->getByForm('Oeste', 1001, 1086, 1325, 1339);
+            case 'Linea_Sur':
+                return $this->getByForm('Linea_Sur', 295, 347);
             break;
-            case 'Norte':
-                return $this->getByForm('Norte', 1104, 1316);
+            case 'Cordillera':
+                return $this->getByForm('Cordillera', 363, 745);
             break;
-            case 'Sur':
-                return $this->getByForm('Sur', 1348, 1597);
+            case 'Valle_Medio':
+                return $this->getByForm('Valle_Medio', 751, 880);
+            break;
+            case 'Alto_Valle_Este':
+                return $this->getByForm('Alto_Valle_Este', 883, 1000);
+            break;
+            case 'Alto_Valle_Centro':
+                return $this->getByForm('Alto_Valle_Centro', 1008, 1322);
+            break;
+            case 'Alto_Valle_Oeste':
+                return $this->getByForm('Alto_Valle_Oeste', 1323, 1689);
             break;
         }
     }
 
     private function getByForm($zona, $desde, $hasta, $desde2 = null, $hasta2 = null) {
-        $candidatos = Candidate::select('id', 'color', 'nombre')->where('id', '<=', 13)->get();
+        $candidatos = Candidate::select('id', 'color', 'nombre')->where('id', '<=', 9)->get();
         $forms = [];
         if ($desde2) {
             $forms_a=Form::where('mesa', '>=', $desde)->where('mesa', '<=', $hasta);
@@ -122,7 +134,7 @@ class FormController extends Controller
         $res = [];
         $votos_totales=0;
         $forms->map(function($form) use (&$votos_totales) {
-            $votos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '<=', 13)->get();
+            $votos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '<=', 9)->get();
             $votos_del_form->map(function($voto) use (&$votos_totales) {
                 $votos_totales += $voto->cantidad;
             });
@@ -152,7 +164,7 @@ class FormController extends Controller
                 $votos_totales += $voto->cantidad;
             });
 
-            $votos_invalidos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '>', 13)->get();
+            $votos_invalidos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '>', 9)->get();
             $votos_invalidos_del_form->map(function($voto) use (&$votos_invalidos) {
                 $votos_invalidos += $voto->cantidad;
             });
@@ -186,7 +198,7 @@ class FormController extends Controller
     }
 
     public function exportar() {
-        return Excel::download(new VotesExport, 'Votos.xls', \Maatwebsite\Excel\Excel::XLS);
+        return Excel::download(new VotesExport, 'Votos RN.xls', \Maatwebsite\Excel\Excel::XLS);
     }
 
 }

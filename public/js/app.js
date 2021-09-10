@@ -21047,6 +21047,7 @@ __webpack_require__.r(__webpack_exports__);
       type: 'bar',
       //bar, pie, doughnut
       filter: 'Provincial',
+      title: 'Provincial',
       chartData: {
         labels: [],
         datasets: []
@@ -21102,6 +21103,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     filtrar: function filtrar(filter) {
       this.filter = filter;
+      this.title = filter.replace('_', ' ');
       this.getVotes();
     },
     exportar: function exportar() {
@@ -24964,21 +24966,45 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_19 = {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_25 = {
   style: {
     "width": "80%",
     "float": "left",
     "margin-bottom": "10px"
   }
 };
-var _hoisted_20 = ["textContent"];
-var _hoisted_21 = {
+var _hoisted_26 = ["textContent"];
+var _hoisted_27 = {
   style: {
     "width": "100%",
     "text-align": "center"
   }
 };
-var _hoisted_22 = {
+var _hoisted_28 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -24986,14 +25012,14 @@ var _hoisted_22 = {
   }
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_25 = ["innerHTML"];
-var _hoisted_26 = {
+var _hoisted_31 = ["innerHTML"];
+var _hoisted_32 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25001,14 +25027,14 @@ var _hoisted_26 = {
   }
 };
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_29 = ["innerHTML"];
-var _hoisted_30 = {
+var _hoisted_35 = ["innerHTML"];
+var _hoisted_36 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25016,13 +25042,13 @@ var _hoisted_30 = {
   }
 };
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_33 = ["innerHTML"];
+var _hoisted_39 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
@@ -25038,74 +25064,119 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return _ctx.filtrar('Provincial');
         }),
         label: "Provincial"
       }), _hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.filtrar('Capital');
+          return _ctx.filtrar('Valle_Inferior');
         }),
-        label: "Neuquen Capital"
+        label: "Valle Inferior"
       }), _hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
         onClick: _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.filtrar('Norte');
+          return _ctx.filtrar('Atlantico');
         }),
-        label: "Zona Norte"
+        label: "Atlántico"
       }), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
         onClick: _cache[3] || (_cache[3] = function ($event) {
-          return _ctx.filtrar('Oeste');
+          return _ctx.filtrar('Linea_Sur');
         }),
-        label: "Zona Oeste"
+        label: "Linea Sur"
       }), _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
         onClick: _cache[4] || (_cache[4] = function ($event) {
-          return _ctx.filtrar('Confluencia');
+          return _ctx.filtrar('Cordillera');
         }),
-        label: "Zona Confluencia"
+        label: "Cordillera"
       }), _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
         onClick: _cache[5] || (_cache[5] = function ($event) {
-          return _ctx.filtrar('Sur');
+          return _ctx.filtrar('Valle_Medio');
         }),
-        label: "Zona Sur"
-      }), _hoisted_16, _hoisted_17, _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Valle Medio"
+      }), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
         onClick: _cache[6] || (_cache[6] = function ($event) {
+          return _ctx.filtrar('Alto_Valle_Este');
+        }),
+        label: "Alto Valle Este"
+      }), _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
+        onClick: _cache[7] || (_cache[7] = function ($event) {
+          return _ctx.filtrar('Alto_Valle_Centro');
+        }),
+        label: "Alto Valle Centro"
+      }), _hoisted_20, _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
+        onClick: _cache[8] || (_cache[8] = function ($event) {
+          return _ctx.filtrar('Alto_Valle_Oeste');
+        }),
+        label: "Alto Valle Oeste"
+      }), _hoisted_22, _hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
+        onClick: _cache[9] || (_cache[9] = function ($event) {
           return _ctx.exportar();
         }),
         label: "Exportar a XLS",
         "class": "p-button-warning"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
         "class": "font-semibold text-xl text-gray-800 leading-tight",
-        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.filter)
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.title)
       }, null, 8
       /* PROPS */
-      , _hoisted_20), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
+      , _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
         type: _ctx.type,
         data: _ctx.chartData,
         options: _ctx.options
       }, null, 8
       /* PROPS */
-      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.asistencia,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_25)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , _hoisted_31)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [_hoisted_33, _hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.nulos,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_29)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , _hoisted_35)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.mesas,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_33)])])])])])])])])];
+      , _hoisted_39)])])])])])])])])];
     }),
     _: 1
     /* STABLE */

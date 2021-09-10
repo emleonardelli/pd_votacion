@@ -10,16 +10,19 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                     <div style="width: 20%; float: left; margin-bottom: 10px">
-                        <Button @click="filtrar('Provincial')"      label="Provincial"/><br><br>
-                        <Button @click="filtrar('Capital')"      label="Neuquen Capital"/><br><br>
-                        <Button @click="filtrar('Norte')"        label="Zona Norte"/><br><br>
-                        <Button @click="filtrar('Oeste')"        label="Zona Oeste"/><br><br>
-                        <Button @click="filtrar('Confluencia')"  label="Zona Confluencia"/><br><br>
-                        <Button @click="filtrar('Sur')"          label="Zona Sur"/><br><br><br>
-                        <Button @click="exportar()"              label="Exportar a XLS" class="p-button-warning"/>
+                        <Button style="width: 90%" @click="filtrar('Provincial')"         label="Provincial"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Valle_Inferior')"     label="Valle Inferior"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Atlantico')"          label="Atlántico"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Linea_Sur')"          label="Linea Sur"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Cordillera')"         label="Cordillera"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Valle_Medio')"        label="Valle Medio"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Alto_Valle_Este')"    label="Alto Valle Este"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Alto_Valle_Centro')"  label="Alto Valle Centro"/><br><br>
+                        <Button style="width: 90%" @click="filtrar('Alto_Valle_Oeste')"   label="Alto Valle Oeste"/><br><br><br>
+                        <Button style="width: 90%" @click="exportar()"                    label="Exportar a XLS" class="p-button-warning"/>
                     </div>
                     <div style="width: 80%; float: left; margin-bottom: 10px">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="filter"></h2>
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="title"></h2>
                         <Chart
                             :type="type"
                             :data="chartData"
@@ -65,6 +68,7 @@
             return {
                 type: 'bar', //bar, pie, doughnut
                 filter: 'Provincial',
+                title: 'Provincial',
                 chartData: {
                     labels: [],
                     datasets: []
@@ -118,6 +122,7 @@
             },
             filtrar(filter) {
                 this.filter=filter;
+                this.title=filter.replace('_', ' ');
                 this.getVotes();
             },
             exportar() {
