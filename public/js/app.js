@@ -21061,7 +21061,7 @@ __webpack_require__.r(__webpack_exports__);
             },
             ticks: {
               callback: function callback(value, index, values) {
-                return '%' + value;
+                return value + ' %';
               }
             }
           }

@@ -12,15 +12,15 @@ use Maatwebsite\Excel\Facades\Excel;
 class FormController extends Controller
 {
     private $cantidad_de_mesas = [
-        'Provincial'         => 241,
-        'Valle_Inferior'     => 28,
-        'Atlantico'          => 15,
-        'Linea_Sur'          => 7,
-        'Cordillera'         => 56,
-        'Valle_Medio'        => 18,
-        'Alto_Valle_Este'    => 16,
-        'Alto_Valle_Centro'  => 48,
-        'Alto_Valle_Oeste'   => 53,
+        'Provincial'         => 1574,
+        'Valle_Inferior'     => 180,
+        'Atlantico'          => 99,
+        'Linea_Sur'          => 44,
+        'Cordillera'         => 369,
+        'Valle_Medio'        => 117,
+        'Alto_Valle_Este'    => 107,
+        'Alto_Valle_Centro'  => 315,
+        'Alto_Valle_Oeste'   => 343,
     ];
 
     public function getCandidates() {
