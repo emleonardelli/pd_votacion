@@ -14,15 +14,15 @@ class CandidateSeeder extends Seeder
      */
     public function run()
     {
-        Candidate::insert(['id' => 1,  'color' => '#800040', 'lista' => '50','partido_sigla' => 'PS','nombre' => 'Paola Echepareborda']);
-        Candidate::insert(['id' => 2,  'color' => '#FF8000', 'lista' => '165','partido_sigla' => 'MAS','nombre' => 'Elena Correa']);
-        Candidate::insert(['id' => 3,  'color' => '#008F39', 'lista' => '504','partido_sigla' => 'Fdt','nombre' => 'Ana Marks']);
-        Candidate::insert(['id' => 4,  'color' => '#2944DF', 'lista' => '502','partido_sigla' => 'JSRN','nombre' => 'Agustín Domingo']);
-        Candidate::insert(['id' => 5,  'color' => '#2944DF', 'lista' => '503 A','partido_sigla' => 'FIT','nombre' => 'Norma Dardik']);
-        Candidate::insert(['id' => 6,  'color' => '#2944DF', 'lista' => '503 R','partido_sigla' => 'FIT','nombre' => 'Jorge Paulic']);
-        Candidate::insert(['id' => 7,  'color' => '#FF6961', 'lista' => '504 A','partido_sigla' => 'JxC','nombre' => 'Germán Jalabert']);
-        Candidate::insert(['id' => 8,  'color' => '#00AAE4', 'lista' => '504 B','partido_sigla' => 'JxC','nombre' => 'Anibal Tortoriello']);
-        Candidate::insert(['id' => 9,  'color' => '#00AAE4', 'lista' => '504 C','partido_sigla' => 'JxC','nombre' => 'Mario De Rege']);
+        Candidate::insert(['id' => 1,  'color' => '#FF6600', 'lista' => '50','partido_sigla' => 'PS','nombre' => 'Paolo Echepareborda']);
+        Candidate::insert(['id' => 2,  'color' => '#FF6961', 'lista' => '165','partido_sigla' => 'MAS','nombre' => 'Elena Correa']);
+        Candidate::insert(['id' => 3,  'color' => '#00AAE4', 'lista' => '504','partido_sigla' => 'Fdt','nombre' => 'Ana Marks']);
+        Candidate::insert(['id' => 4,  'color' => '#008F39', 'lista' => '502','partido_sigla' => 'JSRN','nombre' => 'Agustín Domingo']);
+        Candidate::insert(['id' => 5,  'color' => '#8B0000', 'lista' => '503 A','partido_sigla' => 'FIT','nombre' => 'Norma Dardik']);
+        Candidate::insert(['id' => 6,  'color' => '#8B0000', 'lista' => '503 R','partido_sigla' => 'FIT','nombre' => 'Jorge Paulic']);
+        Candidate::insert(['id' => 7,  'color' => '#FFFF00', 'lista' => '504 A','partido_sigla' => 'JxC','nombre' => 'Germán Jalabert']);
+        Candidate::insert(['id' => 8,  'color' => '#FFFF00', 'lista' => '504 B','partido_sigla' => 'JxC','nombre' => 'Anibal Tortoriello']);
+        Candidate::insert(['id' => 9,  'color' => '#FFFF00', 'lista' => '504 C','partido_sigla' => 'JxC','nombre' => 'Mario De Rege']);
         Candidate::insert(['id' => 10, 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos en Blancos']);
         Candidate::insert(['id' => 11, 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos Nulos']);
         Candidate::insert(['id' => 12, 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos Recurridos']);
