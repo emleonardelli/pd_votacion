@@ -13,6 +13,14 @@
                         <div class="p-field">
                             <label
                                 style="width: 50%; float: left"
+                                for="circuito">Circuito N&deg;</label>
+                            <InputText
+                                style="width: 50%; float: left;margin-bottom: 10px"
+                                id="circuito" type="number" />
+                        </div>
+                        <div class="p-field">
+                            <label
+                                style="width: 50%; float: left"
                                 for="mesa">Mesa N&deg;</label>
                             <InputText
                                 style="width: 50%; float: left;margin-bottom: 10px"
@@ -110,6 +118,7 @@
         methods: {
             save() {
                 let model = {
+                    circuito: document.getElementById('circuito').value,
                     mesa: document.getElementById('mesa').value,
                     total: document.getElementById('total').value,
                 };
