@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\VotesExport;
 use App\Models\Candidate;
+use App\Models\Circuit;
 use App\Models\Form;
 use App\Models\Vote;
 use Illuminate\Http\Request;
@@ -68,8 +69,9 @@ class FormController extends Controller
             ]);
         }
 
+        $circuito = Circuit::where('mesa', $r->mesa)->first()->circuito;
         $form = Form::create([
-            'circuito' => $r->circuito,
+            'circuito' => $circuito,
             'mesa' => $r->mesa,
             'total_votantes' => $r->total,
         ]);

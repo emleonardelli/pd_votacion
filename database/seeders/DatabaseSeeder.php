@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$1/dtGCGFottJcU3BSYijietpTP1TkrX2msFoC4vwJOG29Q8VYGcVS',
         ]);
         $this->call([CandidateSeeder::class]);
+        $this->call([CircuitSeeder::class]);
     }
 }
