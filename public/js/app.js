@@ -24913,98 +24913,21 @@ var _hoisted_5 = {
     "margin-bottom": "10px"
   }
 };
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_25 = {
+var _hoisted_6 = {
   style: {
     "width": "80%",
     "float": "left",
     "margin-bottom": "10px"
   }
 };
-var _hoisted_26 = ["textContent"];
-var _hoisted_27 = {
+var _hoisted_7 = ["textContent"];
+var _hoisted_8 = {
   style: {
     "width": "100%",
     "text-align": "center"
   }
 };
-var _hoisted_28 = {
+var _hoisted_9 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25012,14 +24935,14 @@ var _hoisted_28 = {
   }
 };
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_31 = ["innerHTML"];
-var _hoisted_32 = {
+var _hoisted_12 = ["innerHTML"];
+var _hoisted_13 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25027,14 +24950,14 @@ var _hoisted_32 = {
   }
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
 
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_35 = ["innerHTML"];
-var _hoisted_36 = {
+var _hoisted_16 = ["innerHTML"];
+var _hoisted_17 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25042,13 +24965,13 @@ var _hoisted_36 = {
   }
 };
 
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_39 = ["innerHTML"];
+var _hoisted_20 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
@@ -25065,118 +24988,172 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return _ctx.filtrar('Provincial');
         }),
         label: "Provincial"
-      }), _hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.filtrar('Valle_Inferior');
+          return _ctx.filtrar('Adolfo_Alsina');
         }),
-        label: "Valle Inferior"
-      }), _hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Adolfo Alsina"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.filtrar('Atlantico');
+          return _ctx.filtrar('Conesa');
         }),
-        label: "Atlántico"
-      }), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Conesa"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[3] || (_cache[3] = function ($event) {
-          return _ctx.filtrar('Linea_Sur');
+          return _ctx.filtrar('San_Antonio');
         }),
-        label: "Linea Sur"
-      }), _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "San Antonio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[4] || (_cache[4] = function ($event) {
-          return _ctx.filtrar('Cordillera');
+          return _ctx.filtrar('Valcheta');
         }),
-        label: "Cordillera"
-      }), _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Valcheta"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[5] || (_cache[5] = function ($event) {
-          return _ctx.filtrar('Valle_Medio');
+          return _ctx.filtrar('9_de_Julio');
         }),
-        label: "Valle Medio"
-      }), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "9 de Julio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[6] || (_cache[6] = function ($event) {
-          return _ctx.filtrar('Alto_Valle_Este');
+          return _ctx.filtrar('25_de_Mayo');
         }),
-        label: "Alto Valle Este"
-      }), _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "25 de Mayo"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[7] || (_cache[7] = function ($event) {
-          return _ctx.filtrar('Alto_Valle_Centro');
+          return _ctx.filtrar('Ñorquinco');
         }),
-        label: "Alto Valle Centro"
-      }), _hoisted_20, _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Ñorquinco"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[8] || (_cache[8] = function ($event) {
-          return _ctx.filtrar('Alto_Valle_Oeste');
+          return _ctx.filtrar('Pilcaniyeu');
         }),
-        label: "Alto Valle Oeste"
-      }), _hoisted_22, _hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Pilcaniyeu"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[9] || (_cache[9] = function ($event) {
+          return _ctx.filtrar('Bariloche');
+        }),
+        label: "Bariloche"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[10] || (_cache[10] = function ($event) {
+          return _ctx.filtrar('Pichi_Mahuida');
+        }),
+        label: "Pichi Mahuida"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[11] || (_cache[11] = function ($event) {
+          return _ctx.filtrar('Avellaneda');
+        }),
+        label: "Avellaneda"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[12] || (_cache[12] = function ($event) {
+          return _ctx.filtrar('General_Roca');
+        }),
+        label: "General Roca"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[13] || (_cache[13] = function ($event) {
+          return _ctx.filtrar('El_Cuy');
+        }),
+        label: "El Cuy"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
           "width": "90%"
         },
-        onClick: _cache[9] || (_cache[9] = function ($event) {
+        onClick: _cache[14] || (_cache[14] = function ($event) {
           return _ctx.exportar();
         }),
         label: "Exportar a XLS",
         "class": "p-button-warning"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
         "class": "font-semibold text-xl text-gray-800 leading-tight",
         textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.title)
       }, null, 8
       /* PROPS */
-      , _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
+      , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
         type: _ctx.type,
         data: _ctx.chartData,
         options: _ctx.options
       }, null, 8
       /* PROPS */
-      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.asistencia,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_31)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [_hoisted_33, _hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , _hoisted_12)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.nulos,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_35)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.mesas,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_39)])])])])])])])])];
+      , _hoisted_20)])])])])])])])])];
     }),
     _: 1
     /* STABLE */

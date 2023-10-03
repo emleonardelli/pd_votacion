@@ -17,7 +17,7 @@ class CreateFormsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('mesa');
-            $table->integer('total_votantes');
+            $table->integer('total_votantes')->default(0);
         });
     }
 

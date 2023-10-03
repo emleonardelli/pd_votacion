@@ -12,15 +12,20 @@ use Maatwebsite\Excel\Facades\Excel;
 class FormController extends Controller
 {
     private $cantidad_de_mesas = [
-        'Provincial'         => 1574,
-        'Valle_Inferior'     => 180,
-        'Atlantico'          => 99,
-        'Linea_Sur'          => 44,
-        'Cordillera'         => 369,
-        'Valle_Medio'        => 117,
-        'Alto_Valle_Este'    => 107,
-        'Alto_Valle_Centro'  => 315,
-        'Alto_Valle_Oeste'   => 343,
+        'Provincial'     => 1800,
+        'Adolfo_Alsina'  => 180,
+        'Conesa'         => 18,
+        'San_Antonio'    => 88,
+        'Valcheta'       => 17,
+        '9_de_Julio'     => 11,
+        '25_de_Mayo'     => 42,
+        'Ñorquinco'      => 8,
+        'Pilcaniyeu'     => 30,
+        'Bariloche'      => 385,
+        'Pichi_Mahuida'  => 38,
+        'Avellaneda'     => 96,
+        'General_Roca'   => 86,
+        'El_Cuy'         => 12,
     ];
 
     public function getCandidates() {
@@ -93,31 +98,46 @@ class FormController extends Controller
     public function getVotes(Request $r) {
         switch ($r->filter) {
             case 'Provincial':
-                return $this->getByForm('Provincial', 0, 1689);
+                return $this->getByForm('Provincial', 0, 1800);
             break;
-            case 'Valle_Inferior':
-                return $this->getByForm('Valle_Inferior', 1, 190);
+            case 'Adolfo_Alsina':
+                return $this->getByForm('Adolfo_Alsina', 1, 180);
             break;
-            case 'Atlantico':
-                return $this->getByForm('Atlantico', 191, 290);
+            case 'Conesa':
+                return $this->getByForm('Conesa', 182, 200);
             break;
-            case 'Linea_Sur':
-                return $this->getByForm('Linea_Sur', 295, 347);
+            case 'San_Antonio':
+                return $this->getByForm('San_Antonio', 201, 289);
             break;
-            case 'Cordillera':
-                return $this->getByForm('Cordillera', 363, 745);
+            case 'Valcheta':
+                return $this->getByForm('Valcheta', 290, 307);
             break;
-            case 'Valle_Medio':
-                return $this->getByForm('Valle_Medio', 751, 880);
+            case '9_de_Julio':
+                return $this->getByForm('9_de_Julio', 308, 319);
             break;
-            case 'Alto_Valle_Este':
-                return $this->getByForm('Alto_Valle_Este', 883, 1000);
+            case '25_de_Mayo':
+                return $this->getByForm('25_de_Mayo', 320, 362);
             break;
-            case 'Alto_Valle_Centro':
-                return $this->getByForm('Alto_Valle_Centro', 1008, 1322);
+            case 'Ñorquinco':
+                return $this->getByForm('Ñorquinco', 363, 371);
             break;
-            case 'Alto_Valle_Oeste':
-                return $this->getByForm('Alto_Valle_Oeste', 1323, 1689);
+            case 'Pilcaniyeu':
+                return $this->getByForm('Pilcaniyeu', 372, 402);
+            break;
+            case 'Bariloche':
+                return $this->getByForm('Bariloche', 403, 788);
+            break;
+            case 'Pichi_Mahuida':
+                return $this->getByForm('Pichi_Mahuida', 789, 827);
+            break;
+            case 'Avellaneda':
+                return $this->getByForm('Avellaneda', 828, 924);
+            break;
+            case 'General_Roca':
+                return $this->getByForm('General_Roca', 925, 1787);
+            break;
+            case 'El_Cuy':
+                return $this->getByForm('El_Cuy', 1788, 1800);
             break;
         }
     }
@@ -150,7 +170,7 @@ class FormController extends Controller
             });
             array_push($res, [
                 'nombre' => $candidato->nombre,
-                'votos' => $votos/$votos_totales * 100,
+                'votos' => $votos_totales == 0 ? 0 : ($votos/$votos_totales * 100),
                 'color' => $candidato->color,
             ]);
         }
@@ -191,9 +211,9 @@ class FormController extends Controller
 
         return [
             'grafico' => $res,
-            'votos_nulos' => number_format($votos_invalidos / $votos_totales * 100, 2, ',', '.'). ' %',
-            'mesas_computadas' => number_format($mesas / $mesas_total * 100, 2, ',', '.'). " % ($mesas de $mesas_total)",
-            'asistencia' => number_format($asistencia / $asistencia_total * 100, 2, ',', '.'). " % ($asistencia de $asistencia_total)",
+            'votos_nulos' => number_format($votos_totales == 0 ? 0 : $votos_invalidos / $votos_totales * 100, 2, ',', '.'). ' %',
+            'mesas_computadas' => number_format($mesas_total == 0 ? 0 : $mesas / $mesas_total * 100, 2, ',', '.'). " % ($mesas de $mesas_total)",
+            'asistencia' => number_format($asistencia_total == 0 ? 0 : $asistencia / $asistencia_total * 100, 2, ',', '.'). " % ($asistencia de $asistencia_total)",
         ];
     }
 
