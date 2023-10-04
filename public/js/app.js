@@ -21138,22 +21138,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   data: function data() {
     return {
-      candidates: []
+      candidatePresidentes: [],
+      candidateDiputados: []
     };
   },
   mounted: function mounted() {
-    this.candidates = this.getCandidates();
+    this.getCandidates();
   },
   methods: {
     save: function save() {
       var _this = this;
 
       var model = {
-        mesa: document.getElementById('mesa').value,
-        total: document.getElementById('total').value
+        mesa_presidente: document.getElementById('mesa_presidente').value,
+        mesa_diputado: document.getElementById('mesa_diputado').value,
+        total_presidente: document.getElementById('total_presidente').value,
+        total_diputado: document.getElementById('total_diputado').value
       };
-      this.candidates.map(function (candidate) {
-        model["candidato_".concat(candidate.id)] = document.getElementById("candidato_".concat(candidate.id)).value;
+      this.candidatePresidentes.map(function (candidate) {
+        model["candidato_presidente_".concat(candidate.id)] = document.getElementById("candidato_presidente_".concat(candidate.id)).value;
+      });
+      this.candidateDiputados.map(function (candidate) {
+        model["candidato_diputado_".concat(candidate.id)] = document.getElementById("candidato_diputado_".concat(candidate.id)).value;
       });
       axios.post('/api/saveCandidates', model).then(function (res) {
         if (res.data.status == 406) {
@@ -21181,7 +21187,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return axios.get('/api/getCandidates').then(function (data) {
-        return _this2.candidates = data.data;
+        _this2.candidatePresidentes = data.data.filter(function (item) {
+          return item.eleccion === 'presidente';
+        });
+        _this2.candidateDiputados = data.data.filter(function (item) {
+          return item.eleccion !== 'presidente';
+        });
       });
     }
   },
@@ -25180,68 +25191,142 @@ __webpack_require__.r(__webpack_exports__);
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-317d1a6e");
 
 var _hoisted_1 = {
-  "class": "relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0"
+  "class": "relative min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0"
 };
 var _hoisted_2 = {
-  "class": "max-w-6xl mx-auto sm:px-6 lg:px-8"
+  "class": "relative flex items-top justify-center"
 };
 var _hoisted_3 = {
-  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+  "class": "max-w-6xl sm:px-6 lg:px-8"
 };
 var _hoisted_4 = {
+  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+};
+var _hoisted_5 = {
   "class": "p-6"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex items-center"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "ml-1 text-lg leading-7 font-semibold"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "underline text-gray-900 dark:text-white"
-}, "Formulario de Carga de Votos")])], -1
+}, "CARGA DE VOTOS PRESIDENTE")])], -1
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_8 = {
   "class": "p-fluid"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "p-field"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   style: {
     "width": "50%",
     "float": "left"
   },
-  "for": "mesa"
+  "for": "mesa_presidente"
 }, "Mesa N°", -1
 /* HOISTED */
 );
 
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "p-field"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   style: {
     "width": "50%",
     "float": "left"
   },
-  "for": "total"
+  "for": "total_presidente"
 }, "Total Votantes Empadronados", -1
 /* HOISTED */
 );
 
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "p-fluid"
 };
-var _hoisted_13 = ["for", "textContent"];
-var _hoisted_14 = {
+var _hoisted_14 = ["for", "textContent"];
+var _hoisted_15 = {
+  "class": "max-w-6xl sm:px-6 lg:px-8"
+};
+var _hoisted_16 = {
+  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+};
+var _hoisted_17 = {
+  "class": "p-6"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "ml-1 text-lg leading-7 font-semibold"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "underline text-gray-900 dark:text-white"
+}, "CARGA DE VOTOS DIPUTADOS")])], -1
+/* HOISTED */
+);
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_20 = {
+  "class": "p-fluid"
+};
+var _hoisted_21 = {
+  "class": "p-field"
+};
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  style: {
+    "width": "50%",
+    "float": "left"
+  },
+  "for": "mesa_diputado"
+}, "Mesa N°", -1
+/* HOISTED */
+);
+
+var _hoisted_23 = {
+  "class": "p-field"
+};
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  style: {
+    "width": "50%",
+    "float": "left"
+  },
+  "for": "total_diputado"
+}, "Total Votantes Empadronados", -1
+/* HOISTED */
+);
+
+var _hoisted_25 = {
+  "class": "p-fluid"
+};
+var _hoisted_26 = ["for", "textContent"];
+var _hoisted_27 = {
+  "class": "relative flex justify-center "
+};
+var _hoisted_28 = {
+  "class": "max-w-6xl sm:px-6 lg:px-8"
+};
+var _hoisted_29 = {
+  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+};
+var _hoisted_30 = {
+  "class": "p-6"
+};
+var _hoisted_31 = {
   "class": "mt-2 text-center text-gray-600 dark:text-gray-400 text-sm"
 };
 
@@ -25258,24 +25343,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Elecciones 2021"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
     style: {
       "width": "50%",
       "float": "left",
       "margin-bottom": "10px"
     },
-    id: "mesa",
+    id: "mesa_presidente",
     type: "number"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
     style: {
       "width": "50%",
       "float": "left",
       "margin-bottom": "10px"
     },
-    id: "total",
+    id: "total_presidente",
     type: "number",
     value: "330"
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidates, function (candidate) {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidatePresidentes, function (candidate) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: candidate,
       "class": "p-field"
@@ -25284,30 +25369,73 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "width": "70%",
         "float": "left"
       },
-      "for": "candidato_".concat(candidate.id),
+      "for": "candidato_presidente_".concat(candidate.id),
       textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(candidate.titulo)
     }, null, 8
     /* PROPS */
-    , _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
       style: {
         "width": "30%",
         "float": "left",
         "margin-bottom": "10px"
       },
-      id: "candidato_".concat(candidate.id),
+      id: "candidato_presidente_".concat(candidate.id),
       type: "number"
     }, null, 8
     /* PROPS */
     , ["id"])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+  ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    style: {
+      "width": "50%",
+      "float": "left",
+      "margin-bottom": "10px"
+    },
+    id: "mesa_diputado",
+    type: "number"
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    style: {
+      "width": "50%",
+      "float": "left",
+      "margin-bottom": "10px"
+    },
+    id: "total_diputado",
+    type: "number",
+    value: "330"
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidateDiputados, function (candidate) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: candidate,
+      "class": "p-field"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+      style: {
+        "width": "70%",
+        "float": "left"
+      },
+      "for": "candidato_diputado_".concat(candidate.id),
+      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(candidate.titulo)
+    }, null, 8
+    /* PROPS */
+    , _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+      style: {
+        "width": "30%",
+        "float": "left",
+        "margin-bottom": "10px"
+      },
+      id: "candidato_diputado_".concat(candidate.id),
+      type: "number"
+    }, null, 8
+    /* PROPS */
+    , ["id"])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
     "class": "p-button-lg",
     label: "Guardar",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.save();
     })
-  })])])])])])], 64
+  })])])])])])])], 64
   /* STABLE_FRAGMENT */
   );
 }

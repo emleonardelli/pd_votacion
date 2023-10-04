@@ -21,6 +21,7 @@ class CreateCandidatesTable extends Migration
             $table->string('partido')->nullable();
             $table->string('partido_sigla');
             $table->string('nombre');
+            $table->string('eleccion'); //diputados presidentes
         });
     }
 

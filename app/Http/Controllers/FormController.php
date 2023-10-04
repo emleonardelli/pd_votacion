@@ -29,7 +29,7 @@ class FormController extends Controller
     ];
 
     public function getCandidates() {
-        $list = Candidate::select(['id', 'lista', 'partido_sigla', 'nombre'])->orderBy('id', 'ASC')->get();
+        $list = Candidate::select(['id', 'eleccion',  'lista', 'partido_sigla', 'nombre'])->orderBy('id', 'ASC')->get();
         $list->map(function($candidate) {
             if ($candidate->lista == 0) {
                 $candidate->titulo = "$candidate->nombre";
@@ -41,8 +41,9 @@ class FormController extends Controller
     }
 
     public function saveCandidates(Request $r) {
-        $check = Form::where('mesa', $r->mesa)->count();
-        if ($check > 0) {
+        $check_presidente = Form::where('mesa', $r->mesa_presidente)->where('eleccion', 'presidente')->count();
+        $check_diputado = Form::where('mesa', $r->mesa_diputado)->where('eleccion', 'diputado')->count();
+        if ($check_presidente > 0 || $check_diputado > 0) {
             return response()->json([
                 'error' => 'Este formulario ya fue cargado!',
                 'data' => [],
@@ -52,11 +53,19 @@ class FormController extends Controller
 
         $candidatos = Candidate::all();
         $error = true;
-        $total_cargados = null;
-        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados) {
-            if ($r->input('candidato_'.$candidato->id)) {
+        $total_cargados_presidente = null;
+        $total_cargados_diputado = null;
+        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados_presidente) {
+            if ($r->input('candidato_presidente_'.$candidato->id)) {
                 $error = false;
-                $total_cargados += $r->input('candidato_'.$candidato->id);
+                $total_cargados_presidente += $r->input('candidato_presidente_'.$candidato->id);
+            }
+        });
+
+        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados_diputado) {
+            if ($r->input('candidato_diputado_'.$candidato->id)) {
+                $error = false;
+                $total_cargados_diputado += $r->input('candidato_diputado_'.$candidato->id);
             }
         });
 
@@ -68,7 +77,7 @@ class FormController extends Controller
             ]);
         }
 
-        if ($r->total < $total_cargados) {
+        if ($r->total_presidente < $total_cargados_presidente || $r->total_diputado < $total_cargados_diputado) {
             return response()->json([
                 'error' => 'El total de votos es mayor al total del padron!',
                 'data' => [],
@@ -76,15 +85,29 @@ class FormController extends Controller
             ]);
         }
 
-        $form = Form::create([
-            'mesa' => $r->mesa,
-            'total_votantes' => $r->total,
+        $form_presidente = Form::create([
+            'mesa' => $r->mesa_presidente,
+            'eleccion' => 'presidente',
+            'total_votantes' => $r->total_presidente,
         ]);
-        $form->save();
-        $candidatos->map(function($candidato) use ($r, $form) {
+        $form_presidente->save();
+        $candidatos->map(function($candidato) use ($r, $form_presidente) {
             Vote::insert([
-                'cantidad' => $r->input('candidato_'.$candidato->id) ? $r->input('candidato_'.$candidato->id) : 0,
-                'formulario_id' => $form->id,
+                'cantidad' => $r->input('candidato_presidente_'.$candidato->id) ? $r->input('candidato_presidente_'.$candidato->id) : 0,
+                'formulario_id' => $form_presidente->id,
+                'candidato_id' => $candidato->id,
+            ]);
+        });
+        $form_diputado = Form::create([
+            'mesa' => $r->mesa_diputado,
+            'eleccion' => 'diputado',
+            'total_votantes' => $r->total_diputado,
+        ]);
+        $form_diputado->save();
+        $candidatos->map(function($candidato) use ($r, $form_diputado) {
+            Vote::insert([
+                'cantidad' => $r->input('candidato_diputado_'.$candidato->id) ? $r->input('candidato_diputado_'.$candidato->id) : 0,
+                'formulario_id' => $form_diputado->id,
                 'candidato_id' => $candidato->id,
             ]);
         });
