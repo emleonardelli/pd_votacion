@@ -12,8 +12,13 @@
                         <div class="flex">
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('inicio')" :active="route().current('inicio')">
-                                    Inicio
+                                <jet-nav-link :href="route('estadisticas-presidente')" :active="route().current('estadisticas-presidente')">
+                                    Resultado presidente
+                                </jet-nav-link>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('estadisticas-diputado')" :active="route().current('estadisticas-diputado')">
+                                    Resultado diputados
                                 </jet-nav-link>
                             </div>
                         </div>

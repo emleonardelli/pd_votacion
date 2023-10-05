@@ -93,6 +93,7 @@ class FormController extends Controller
         $form_presidente->save();
         $candidatos->map(function($candidato) use ($r, $form_presidente) {
             Vote::insert([
+                'eleccion' => 'presidente',
                 'cantidad' => $r->input('candidato_presidente_'.$candidato->id) ? $r->input('candidato_presidente_'.$candidato->id) : 0,
                 'formulario_id' => $form_presidente->id,
                 'candidato_id' => $candidato->id,
@@ -106,6 +107,7 @@ class FormController extends Controller
         $form_diputado->save();
         $candidatos->map(function($candidato) use ($r, $form_diputado) {
             Vote::insert([
+                'eleccion' => 'diputado',
                 'cantidad' => $r->input('candidato_diputado_'.$candidato->id) ? $r->input('candidato_diputado_'.$candidato->id) : 0,
                 'formulario_id' => $form_diputado->id,
                 'candidato_id' => $candidato->id,
@@ -120,64 +122,39 @@ class FormController extends Controller
 
     public function getVotes(Request $r) {
         switch ($r->filter) {
-            case 'Provincial':
-                return $this->getByForm('Provincial', 0, 1800);
-            break;
-            case 'Adolfo_Alsina':
-                return $this->getByForm('Adolfo_Alsina', 1, 180);
-            break;
-            case 'Conesa':
-                return $this->getByForm('Conesa', 182, 200);
-            break;
-            case 'San_Antonio':
-                return $this->getByForm('San_Antonio', 201, 289);
-            break;
-            case 'Valcheta':
-                return $this->getByForm('Valcheta', 290, 307);
-            break;
-            case '9_de_Julio':
-                return $this->getByForm('9_de_Julio', 308, 319);
-            break;
-            case '25_de_Mayo':
-                return $this->getByForm('25_de_Mayo', 320, 362);
-            break;
-            case 'Ñorquinco':
-                return $this->getByForm('Ñorquinco', 363, 371);
-            break;
-            case 'Pilcaniyeu':
-                return $this->getByForm('Pilcaniyeu', 372, 402);
-            break;
-            case 'Bariloche':
-                return $this->getByForm('Bariloche', 403, 788);
-            break;
-            case 'Pichi_Mahuida':
-                return $this->getByForm('Pichi_Mahuida', 789, 827);
-            break;
-            case 'Avellaneda':
-                return $this->getByForm('Avellaneda', 828, 924);
-            break;
-            case 'General_Roca':
-                return $this->getByForm('General_Roca', 925, 1787);
-            break;
-            case 'El_Cuy':
-                return $this->getByForm('El_Cuy', 1788, 1800);
-            break;
+            case 'Provincial':     return $this->getByForm($r->eleccion, 'Provincial', 0, 1800);        break;
+            case 'Adolfo_Alsina':  return $this->getByForm($r->eleccion, 'Adolfo_Alsina', 1, 180);      break;
+            case 'Conesa':         return $this->getByForm($r->eleccion, 'Conesa', 182, 200);           break;
+            case 'San_Antonio':    return $this->getByForm($r->eleccion, 'San_Antonio', 201, 289);      break;
+            case 'Valcheta':       return $this->getByForm($r->eleccion, 'Valcheta', 290, 307);         break;
+            case '9_de_Julio':     return $this->getByForm($r->eleccion, '9_de_Julio', 308, 319);       break;
+            case '25_de_Mayo':     return $this->getByForm($r->eleccion, '25_de_Mayo', 320, 362);       break;
+            case 'Ñorquinco':      return $this->getByForm($r->eleccion, 'Ñorquinco', 363, 371);        break;
+            case 'Pilcaniyeu':     return $this->getByForm($r->eleccion, 'Pilcaniyeu', 372, 402);       break;
+            case 'Bariloche':      return $this->getByForm($r->eleccion, 'Bariloche', 403, 788);        break;
+            case 'Pichi_Mahuida':  return $this->getByForm($r->eleccion, 'Pichi_Mahuida', 789, 827);    break;
+            case 'Avellaneda':     return $this->getByForm($r->eleccion, 'Avellaneda', 828, 924);       break;
+            case 'General_Roca':   return $this->getByForm($r->eleccion, 'General_Roca', 925, 1787);    break;
+            case 'El_Cuy':         return $this->getByForm($r->eleccion, 'El_Cuy', 1788, 1800);         break;
         }
     }
 
-    private function getByForm($zona, $desde, $hasta, $desde2 = null, $hasta2 = null) {
-        $candidatos = Candidate::select('id', 'color', 'nombre')->where('id', '<=', 9)->get();
+    private function getByForm($eleccion, $zona, $desde, $hasta, $desde2 = null, $hasta2 = null) {
+        $candidatos = Candidate::select('id', 'color', 'nombre')
+            ->where('lista', '<>', 0)
+            ->where('eleccion', $eleccion)
+            ->get();
         $forms = [];
         if ($desde2) {
-            $forms_a=Form::where('mesa', '>=', $desde)->where('mesa', '<=', $hasta);
-            $forms=Form::where('mesa', '>=', $desde2)->where('mesa', '<=', $hasta2)->union($forms_a)->get();
+            $forms_a=Form::where('mesa', '>=', $desde)->where('eleccion', $eleccion)->where('mesa', '<=', $hasta);
+            $forms=Form::where('mesa', '>=', $desde2)->where('eleccion', $eleccion)->where('mesa', '<=', $hasta2)->union($forms_a)->get();
         }else{
-            $forms=Form::where('mesa', '>=', $desde)->where('mesa', '<=', $hasta)->get();
+            $forms=Form::where('mesa', '>=', $desde)->where('eleccion', $eleccion)->where('mesa', '<=', $hasta)->get();
         }
         $res = [];
         $votos_totales=0;
-        $forms->map(function($form) use (&$votos_totales) {
-            $votos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '<=', 9)->get();
+        $forms->map(function($form) use (&$votos_totales, $eleccion) {
+            $votos_del_form = Vote::where('formulario_id', $form->id)->where('eleccion', $eleccion)->get();
             $votos_del_form->map(function($voto) use (&$votos_totales) {
                 $votos_totales += $voto->cantidad;
             });
