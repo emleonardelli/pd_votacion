@@ -19,6 +19,7 @@ class CreateVotesTable extends Migration
             $table->unsignedBigInteger('candidato_id');
             $table->foreign('candidato_id')->references('id')->on('candidates');
             $table->unsignedBigInteger('formulario_id');
+            $table->string('eleccion'); //diputados presidentes
             $table->foreign('formulario_id')->references('id')->on('forms');
             $table->integer('cantidad');
         });

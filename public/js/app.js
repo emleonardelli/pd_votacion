@@ -21114,6 +21114,202 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsDiputado.vue?vue&type=script&lang=js":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsDiputado.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var primevue_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/chart */ "./node_modules/primevue/chart/chart.esm.js");
+/* harmony import */ var primevue_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/button */ "./node_modules/primevue/button/button.esm.js");
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  components: {
+    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Chart: primevue_chart__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Button: primevue_button__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    return {
+      type: 'bar',
+      //bar, pie, doughnut
+      filter: 'Provincial',
+      title: 'Provincial',
+      eleccion: 'diputado',
+      chartData: {
+        labels: [],
+        datasets: []
+      },
+      options: {
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Porcentaje'
+            },
+            ticks: {
+              callback: function callback(value, index, values) {
+                return value + ' %';
+              }
+            }
+          }
+        }
+      },
+      nulos: 0,
+      mesas: 0,
+      asistencia: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getVotes(this.filter);
+  },
+  methods: {
+    getVotes: function getVotes() {
+      var _this = this;
+
+      return axios.get("/api/getVotes/".concat(this.filter, "/").concat(this.eleccion)).then(function (data) {
+        var labels = [];
+        var dataset = {
+          label: 'Candidatos',
+          data: [],
+          backgroundColor: []
+        };
+        data.data.grafico.map(function (candidato) {
+          labels.push(candidato.nombre);
+          dataset.data.push(candidato.votos);
+          dataset.backgroundColor.push(candidato.color);
+        });
+        var chartData = {
+          labels: labels,
+          datasets: [dataset]
+        };
+        _this.chartData = chartData;
+        _this.nulos = data.data.votos_nulos;
+        _this.mesas = data.data.mesas_computadas;
+        _this.asistencia = data.data.asistencia;
+      });
+    },
+    filtrar: function filtrar(filter) {
+      this.filter = filter;
+      this.title = filter.replace('_', ' ');
+      this.getVotes();
+    },
+    exportar: function exportar() {
+      window.open('/api/exportar', '_blank');
+    }
+  }
+}));
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsPresidente.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsPresidente.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var primevue_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/chart */ "./node_modules/primevue/chart/chart.esm.js");
+/* harmony import */ var primevue_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/button */ "./node_modules/primevue/button/button.esm.js");
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  components: {
+    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Chart: primevue_chart__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Button: primevue_button__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    return {
+      type: 'bar',
+      //bar, pie, doughnut
+      filter: 'Provincial',
+      title: 'Provincial',
+      eleccion: 'presidente',
+      chartData: {
+        labels: [],
+        datasets: []
+      },
+      options: {
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Porcentaje'
+            },
+            ticks: {
+              callback: function callback(value, index, values) {
+                return value + ' %';
+              }
+            }
+          }
+        }
+      },
+      nulos: 0,
+      mesas: 0,
+      asistencia: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getVotes(this.filter);
+  },
+  methods: {
+    getVotes: function getVotes() {
+      var _this = this;
+
+      return axios.get("/api/getVotes/".concat(this.filter, "/").concat(this.eleccion)).then(function (data) {
+        var labels = [];
+        var dataset = {
+          label: 'Candidatos',
+          data: [],
+          backgroundColor: []
+        };
+        data.data.grafico.map(function (candidato) {
+          labels.push(candidato.nombre);
+          dataset.data.push(candidato.votos);
+          dataset.backgroundColor.push(candidato.color);
+        });
+        var chartData = {
+          labels: labels,
+          datasets: [dataset]
+        };
+        _this.chartData = chartData;
+        _this.nulos = data.data.votos_nulos;
+        _this.mesas = data.data.mesas_computadas;
+        _this.asistencia = data.data.asistencia;
+      });
+    },
+    filtrar: function filtrar(filter) {
+      this.filter = filter;
+      this.title = filter.replace('_', ' ');
+      this.getVotes();
+    },
+    exportar: function exportar() {
+      window.open('/api/exportar', '_blank');
+    }
+  }
+}));
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Welcome.vue?vue&type=script&lang=js":
 /*!********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Welcome.vue?vue&type=script&lang=js ***!
@@ -21138,22 +21334,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   data: function data() {
     return {
-      candidates: []
+      candidatePresidentes: [],
+      candidateDiputados: []
     };
   },
   mounted: function mounted() {
-    this.candidates = this.getCandidates();
+    this.getCandidates();
   },
   methods: {
     save: function save() {
       var _this = this;
 
       var model = {
-        mesa: document.getElementById('mesa').value,
-        total: document.getElementById('total').value
+        mesa_presidente: document.getElementById('mesa_presidente').value,
+        mesa_diputado: document.getElementById('mesa_diputado').value,
+        total_presidente: document.getElementById('total_presidente').value,
+        total_diputado: document.getElementById('total_diputado').value
       };
-      this.candidates.map(function (candidate) {
-        model["candidato_".concat(candidate.id)] = document.getElementById("candidato_".concat(candidate.id)).value;
+      this.candidatePresidentes.map(function (candidate) {
+        model["candidato_presidente_".concat(candidate.id)] = document.getElementById("candidato_presidente_".concat(candidate.id)).value;
+      });
+      this.candidateDiputados.map(function (candidate) {
+        model["candidato_diputado_".concat(candidate.id)] = document.getElementById("candidato_diputado_".concat(candidate.id)).value;
       });
       axios.post('/api/saveCandidates', model).then(function (res) {
         if (res.data.status == 406) {
@@ -21181,7 +21383,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return axios.get('/api/getCandidates').then(function (data) {
-        return _this2.candidates = data.data;
+        _this2.candidatePresidentes = data.data.filter(function (item) {
+          return item.eleccion === 'presidente';
+        });
+        _this2.candidateDiputados = data.data.filter(function (item) {
+          return item.eleccion !== 'presidente';
+        });
       });
     }
   },
@@ -22368,22 +22575,28 @@ var _hoisted_6 = {
   "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Inicio ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Resultado presidente ");
 
 var _hoisted_8 = {
+  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Resultado diputados ");
+
+var _hoisted_10 = {
   "class": "-mr-2 flex items-center sm:hidden"
 };
-var _hoisted_9 = {
+var _hoisted_11 = {
   "class": "h-6 w-6",
   stroke: "currentColor",
   fill: "none",
   viewBox: "0 0 24 24"
 };
-var _hoisted_10 = {
+var _hoisted_12 = {
   key: 0,
   "class": "bg-white shadow"
 };
-var _hoisted_11 = {
+var _hoisted_13 = {
   "class": "max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -22398,8 +22611,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_banner), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Primary Navigation Menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Navigation Links "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_nav_link, {
-    href: _ctx.route('inicio'),
-    active: _ctx.route().current('inicio')
+    href: _ctx.route('estadisticas-presidente'),
+    active: _ctx.route().current('estadisticas-presidente')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_7];
@@ -22409,12 +22622,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href", "active"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Hamburger "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , ["href", "active"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_nav_link, {
+    href: _ctx.route('estadisticas-diputado'),
+    active: _ctx.route().current('estadisticas-diputado')
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_9];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["href", "active"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Hamburger "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.showingNavigationDropdown = !_ctx.showingNavigationDropdown;
     }),
     "class": "inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
-  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'hidden': _ctx.showingNavigationDropdown,
       'inline-flex': !_ctx.showingNavigationDropdown
@@ -22436,7 +22661,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     d: "M6 18L18 6M6 6l12 12"
   }, null, 2
   /* CLASS */
-  )]))])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Heading "), _ctx.$slots.header ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "header")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])]);
+  )]))])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Heading "), _ctx.$slots.header ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "header")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])]);
 }
 
 /***/ }),
@@ -24913,98 +25138,21 @@ var _hoisted_5 = {
     "margin-bottom": "10px"
   }
 };
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_25 = {
+var _hoisted_6 = {
   style: {
     "width": "80%",
     "float": "left",
     "margin-bottom": "10px"
   }
 };
-var _hoisted_26 = ["textContent"];
-var _hoisted_27 = {
+var _hoisted_7 = ["textContent"];
+var _hoisted_8 = {
   style: {
     "width": "100%",
     "text-align": "center"
   }
 };
-var _hoisted_28 = {
+var _hoisted_9 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25012,14 +25160,14 @@ var _hoisted_28 = {
   }
 };
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_31 = ["innerHTML"];
-var _hoisted_32 = {
+var _hoisted_12 = ["innerHTML"];
+var _hoisted_13 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25027,14 +25175,14 @@ var _hoisted_32 = {
   }
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
 
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_35 = ["innerHTML"];
-var _hoisted_36 = {
+var _hoisted_16 = ["innerHTML"];
+var _hoisted_17 = {
   style: {
     "padding": "15px",
     "border": "1px solid black",
@@ -25042,13 +25190,13 @@ var _hoisted_36 = {
   }
 };
 
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_39 = ["innerHTML"];
+var _hoisted_20 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
@@ -25065,118 +25213,744 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return _ctx.filtrar('Provincial');
         }),
         label: "Provincial"
-      }), _hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.filtrar('Valle_Inferior');
+          return _ctx.filtrar('Adolfo_Alsina');
         }),
-        label: "Valle Inferior"
-      }), _hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Adolfo Alsina"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.filtrar('Atlantico');
+          return _ctx.filtrar('Conesa');
         }),
-        label: "Atlántico"
-      }), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Conesa"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[3] || (_cache[3] = function ($event) {
-          return _ctx.filtrar('Linea_Sur');
+          return _ctx.filtrar('San_Antonio');
         }),
-        label: "Linea Sur"
-      }), _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "San Antonio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[4] || (_cache[4] = function ($event) {
-          return _ctx.filtrar('Cordillera');
+          return _ctx.filtrar('Valcheta');
         }),
-        label: "Cordillera"
-      }), _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Valcheta"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[5] || (_cache[5] = function ($event) {
-          return _ctx.filtrar('Valle_Medio');
+          return _ctx.filtrar('9_de_Julio');
         }),
-        label: "Valle Medio"
-      }), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "9 de Julio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[6] || (_cache[6] = function ($event) {
-          return _ctx.filtrar('Alto_Valle_Este');
+          return _ctx.filtrar('25_de_Mayo');
         }),
-        label: "Alto Valle Este"
-      }), _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "25 de Mayo"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[7] || (_cache[7] = function ($event) {
-          return _ctx.filtrar('Alto_Valle_Centro');
+          return _ctx.filtrar('Ñorquinco');
         }),
-        label: "Alto Valle Centro"
-      }), _hoisted_20, _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Ñorquinco"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
-          "width": "90%"
+          "width": "90%",
+          "margin-bottom": "15px"
         },
         onClick: _cache[8] || (_cache[8] = function ($event) {
-          return _ctx.filtrar('Alto_Valle_Oeste');
+          return _ctx.filtrar('Pilcaniyeu');
         }),
-        label: "Alto Valle Oeste"
-      }), _hoisted_22, _hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        label: "Pilcaniyeu"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[9] || (_cache[9] = function ($event) {
+          return _ctx.filtrar('Bariloche');
+        }),
+        label: "Bariloche"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[10] || (_cache[10] = function ($event) {
+          return _ctx.filtrar('Pichi_Mahuida');
+        }),
+        label: "Pichi Mahuida"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[11] || (_cache[11] = function ($event) {
+          return _ctx.filtrar('Avellaneda');
+        }),
+        label: "Avellaneda"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[12] || (_cache[12] = function ($event) {
+          return _ctx.filtrar('General_Roca');
+        }),
+        label: "General Roca"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[13] || (_cache[13] = function ($event) {
+          return _ctx.filtrar('El_Cuy');
+        }),
+        label: "El Cuy"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         style: {
           "width": "90%"
         },
-        onClick: _cache[9] || (_cache[9] = function ($event) {
+        onClick: _cache[14] || (_cache[14] = function ($event) {
           return _ctx.exportar();
         }),
         label: "Exportar a XLS",
         "class": "p-button-warning"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
         "class": "font-semibold text-xl text-gray-800 leading-tight",
         textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.title)
       }, null, 8
       /* PROPS */
-      , _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
+      , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
         type: _ctx.type,
         data: _ctx.chartData,
         options: _ctx.options
       }, null, 8
       /* PROPS */
-      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.asistencia,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_31)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [_hoisted_33, _hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , _hoisted_12)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.nulos,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_35)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      , _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         innerHTML: _ctx.mesas,
         style: {
           "font-weight": "bold"
         }
       }, null, 8
       /* PROPS */
-      , _hoisted_39)])])])])])])])])];
+      , _hoisted_20)])])])])])])])])];
+    }),
+    _: 1
+    /* STABLE */
+
+  });
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsDiputado.vue?vue&type=template&id=4e16c92e":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsDiputado.vue?vue&type=template&id=4e16c92e ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+  "class": "font-semibold text-xl text-gray-800 leading-tight"
+}, " Resultado conteo diputado ", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "py-12"
+};
+var _hoisted_3 = {
+  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+};
+var _hoisted_4 = {
+  "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg p-6"
+};
+var _hoisted_5 = {
+  style: {
+    "width": "20%",
+    "float": "left",
+    "margin-bottom": "10px"
+  }
+};
+var _hoisted_6 = {
+  style: {
+    "width": "80%",
+    "float": "left",
+    "margin-bottom": "10px"
+  }
+};
+var _hoisted_7 = ["textContent"];
+var _hoisted_8 = {
+  style: {
+    "width": "100%",
+    "text-align": "center"
+  }
+};
+var _hoisted_9 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_12 = ["innerHTML"];
+var _hoisted_13 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_16 = ["innerHTML"];
+var _hoisted_17 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_20 = ["innerHTML"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
+
+  var _component_Chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Chart");
+
+  var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
+    title: "Elecciones 2021"
+  }, {
+    header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_1];
+    }),
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[0] || (_cache[0] = function ($event) {
+          return _ctx.filtrar('Provincial');
+        }),
+        label: "Provincial"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[1] || (_cache[1] = function ($event) {
+          return _ctx.filtrar('Adolfo_Alsina');
+        }),
+        label: "Adolfo Alsina"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[2] || (_cache[2] = function ($event) {
+          return _ctx.filtrar('Conesa');
+        }),
+        label: "Conesa"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[3] || (_cache[3] = function ($event) {
+          return _ctx.filtrar('San_Antonio');
+        }),
+        label: "San Antonio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[4] || (_cache[4] = function ($event) {
+          return _ctx.filtrar('Valcheta');
+        }),
+        label: "Valcheta"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[5] || (_cache[5] = function ($event) {
+          return _ctx.filtrar('9_de_Julio');
+        }),
+        label: "9 de Julio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[6] || (_cache[6] = function ($event) {
+          return _ctx.filtrar('25_de_Mayo');
+        }),
+        label: "25 de Mayo"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[7] || (_cache[7] = function ($event) {
+          return _ctx.filtrar('Ñorquinco');
+        }),
+        label: "Ñorquinco"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[8] || (_cache[8] = function ($event) {
+          return _ctx.filtrar('Pilcaniyeu');
+        }),
+        label: "Pilcaniyeu"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[9] || (_cache[9] = function ($event) {
+          return _ctx.filtrar('Bariloche');
+        }),
+        label: "Bariloche"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[10] || (_cache[10] = function ($event) {
+          return _ctx.filtrar('Pichi_Mahuida');
+        }),
+        label: "Pichi Mahuida"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[11] || (_cache[11] = function ($event) {
+          return _ctx.filtrar('Avellaneda');
+        }),
+        label: "Avellaneda"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[12] || (_cache[12] = function ($event) {
+          return _ctx.filtrar('General_Roca');
+        }),
+        label: "General Roca"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[13] || (_cache[13] = function ($event) {
+          return _ctx.filtrar('El_Cuy');
+        }),
+        label: "El Cuy"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
+        onClick: _cache[14] || (_cache[14] = function ($event) {
+          return _ctx.exportar();
+        }),
+        label: "Exportar a XLS",
+        "class": "p-button-warning"
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+        "class": "font-semibold text-xl text-gray-800 leading-tight",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.title)
+      }, null, 8
+      /* PROPS */
+      , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
+        type: _ctx.type,
+        data: _ctx.chartData,
+        options: _ctx.options
+      }, null, 8
+      /* PROPS */
+      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.asistencia,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_12)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.nulos,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.mesas,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_20)])])])])])])])])];
+    }),
+    _: 1
+    /* STABLE */
+
+  });
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+  "class": "font-semibold text-xl text-gray-800 leading-tight"
+}, " Resultado conteo presidente ", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "py-12"
+};
+var _hoisted_3 = {
+  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+};
+var _hoisted_4 = {
+  "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg p-6"
+};
+var _hoisted_5 = {
+  style: {
+    "width": "20%",
+    "float": "left",
+    "margin-bottom": "10px"
+  }
+};
+var _hoisted_6 = {
+  style: {
+    "width": "80%",
+    "float": "left",
+    "margin-bottom": "10px"
+  }
+};
+var _hoisted_7 = ["textContent"];
+var _hoisted_8 = {
+  style: {
+    "width": "100%",
+    "text-align": "center"
+  }
+};
+var _hoisted_9 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Porcentaje de asistencia");
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_12 = ["innerHTML"];
+var _hoisted_13 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Blancos y Nulos");
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_16 = ["innerHTML"];
+var _hoisted_17 = {
+  style: {
+    "padding": "15px",
+    "border": "1px solid black",
+    "border-radius": "10px"
+  }
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Mesas computadas");
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_20 = ["innerHTML"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
+
+  var _component_Chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Chart");
+
+  var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
+    title: "Elecciones 2021"
+  }, {
+    header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_1];
+    }),
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[0] || (_cache[0] = function ($event) {
+          return _ctx.filtrar('Provincial');
+        }),
+        label: "Provincial"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[1] || (_cache[1] = function ($event) {
+          return _ctx.filtrar('Adolfo_Alsina');
+        }),
+        label: "Adolfo Alsina"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[2] || (_cache[2] = function ($event) {
+          return _ctx.filtrar('Conesa');
+        }),
+        label: "Conesa"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[3] || (_cache[3] = function ($event) {
+          return _ctx.filtrar('San_Antonio');
+        }),
+        label: "San Antonio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[4] || (_cache[4] = function ($event) {
+          return _ctx.filtrar('Valcheta');
+        }),
+        label: "Valcheta"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[5] || (_cache[5] = function ($event) {
+          return _ctx.filtrar('9_de_Julio');
+        }),
+        label: "9 de Julio"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[6] || (_cache[6] = function ($event) {
+          return _ctx.filtrar('25_de_Mayo');
+        }),
+        label: "25 de Mayo"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[7] || (_cache[7] = function ($event) {
+          return _ctx.filtrar('Ñorquinco');
+        }),
+        label: "Ñorquinco"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[8] || (_cache[8] = function ($event) {
+          return _ctx.filtrar('Pilcaniyeu');
+        }),
+        label: "Pilcaniyeu"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[9] || (_cache[9] = function ($event) {
+          return _ctx.filtrar('Bariloche');
+        }),
+        label: "Bariloche"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[10] || (_cache[10] = function ($event) {
+          return _ctx.filtrar('Pichi_Mahuida');
+        }),
+        label: "Pichi Mahuida"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[11] || (_cache[11] = function ($event) {
+          return _ctx.filtrar('Avellaneda');
+        }),
+        label: "Avellaneda"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[12] || (_cache[12] = function ($event) {
+          return _ctx.filtrar('General_Roca');
+        }),
+        label: "General Roca"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%",
+          "margin-bottom": "15px"
+        },
+        onClick: _cache[13] || (_cache[13] = function ($event) {
+          return _ctx.filtrar('El_Cuy');
+        }),
+        label: "El Cuy"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+        style: {
+          "width": "90%"
+        },
+        onClick: _cache[14] || (_cache[14] = function ($event) {
+          return _ctx.exportar();
+        }),
+        label: "Exportar a XLS",
+        "class": "p-button-warning"
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+        "class": "font-semibold text-xl text-gray-800 leading-tight",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.title)
+      }, null, 8
+      /* PROPS */
+      , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
+        type: _ctx.type,
+        data: _ctx.chartData,
+        options: _ctx.options
+      }, null, 8
+      /* PROPS */
+      , ["type", "data", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.asistencia,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_12)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.nulos,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        innerHTML: _ctx.mesas,
+        style: {
+          "font-weight": "bold"
+        }
+      }, null, 8
+      /* PROPS */
+      , _hoisted_20)])])])])])])])])];
     }),
     _: 1
     /* STABLE */
@@ -25203,68 +25977,142 @@ __webpack_require__.r(__webpack_exports__);
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-317d1a6e");
 
 var _hoisted_1 = {
-  "class": "relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0"
+  "class": "relative min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0"
 };
 var _hoisted_2 = {
-  "class": "max-w-6xl mx-auto sm:px-6 lg:px-8"
+  "class": "relative flex items-top justify-center"
 };
 var _hoisted_3 = {
-  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+  "class": "max-w-6xl sm:px-6 lg:px-8"
 };
 var _hoisted_4 = {
+  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+};
+var _hoisted_5 = {
   "class": "p-6"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex items-center"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "ml-1 text-lg leading-7 font-semibold"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "underline text-gray-900 dark:text-white"
-}, "Formulario de Carga de Votos")])], -1
+}, "CARGA DE VOTOS PRESIDENTE")])], -1
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_8 = {
   "class": "p-fluid"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "p-field"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   style: {
     "width": "50%",
     "float": "left"
   },
-  "for": "mesa"
+  "for": "mesa_presidente"
 }, "Mesa N°", -1
 /* HOISTED */
 );
 
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "p-field"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   style: {
     "width": "50%",
     "float": "left"
   },
-  "for": "total"
+  "for": "total_presidente"
 }, "Total Votantes Empadronados", -1
 /* HOISTED */
 );
 
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "p-fluid"
 };
-var _hoisted_13 = ["for", "textContent"];
-var _hoisted_14 = {
+var _hoisted_14 = ["for", "textContent"];
+var _hoisted_15 = {
+  "class": "max-w-6xl sm:px-6 lg:px-8"
+};
+var _hoisted_16 = {
+  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+};
+var _hoisted_17 = {
+  "class": "p-6"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "ml-1 text-lg leading-7 font-semibold"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "underline text-gray-900 dark:text-white"
+}, "CARGA DE VOTOS DIPUTADOS")])], -1
+/* HOISTED */
+);
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_20 = {
+  "class": "p-fluid"
+};
+var _hoisted_21 = {
+  "class": "p-field"
+};
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  style: {
+    "width": "50%",
+    "float": "left"
+  },
+  "for": "mesa_diputado"
+}, "Mesa N°", -1
+/* HOISTED */
+);
+
+var _hoisted_23 = {
+  "class": "p-field"
+};
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  style: {
+    "width": "50%",
+    "float": "left"
+  },
+  "for": "total_diputado"
+}, "Total Votantes Empadronados", -1
+/* HOISTED */
+);
+
+var _hoisted_25 = {
+  "class": "p-fluid"
+};
+var _hoisted_26 = ["for", "textContent"];
+var _hoisted_27 = {
+  "class": "relative flex justify-center "
+};
+var _hoisted_28 = {
+  "class": "max-w-6xl sm:px-6 lg:px-8"
+};
+var _hoisted_29 = {
+  "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+};
+var _hoisted_30 = {
+  "class": "p-6"
+};
+var _hoisted_31 = {
   "class": "mt-2 text-center text-gray-600 dark:text-gray-400 text-sm"
 };
 
@@ -25281,24 +26129,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Elecciones 2021"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
     style: {
       "width": "50%",
       "float": "left",
       "margin-bottom": "10px"
     },
-    id: "mesa",
+    id: "mesa_presidente",
     type: "number"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
     style: {
       "width": "50%",
       "float": "left",
       "margin-bottom": "10px"
     },
-    id: "total",
+    id: "total_presidente",
     type: "number",
     value: "330"
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidates, function (candidate) {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidatePresidentes, function (candidate) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: candidate,
       "class": "p-field"
@@ -25307,30 +26155,73 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "width": "70%",
         "float": "left"
       },
-      "for": "candidato_".concat(candidate.id),
+      "for": "candidato_presidente_".concat(candidate.id),
       textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(candidate.titulo)
     }, null, 8
     /* PROPS */
-    , _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
       style: {
         "width": "30%",
         "float": "left",
         "margin-bottom": "10px"
       },
-      id: "candidato_".concat(candidate.id),
+      id: "candidato_presidente_".concat(candidate.id),
       type: "number"
     }, null, 8
     /* PROPS */
     , ["id"])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+  ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    style: {
+      "width": "50%",
+      "float": "left",
+      "margin-bottom": "10px"
+    },
+    id: "mesa_diputado",
+    type: "number"
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+    style: {
+      "width": "50%",
+      "float": "left",
+      "margin-bottom": "10px"
+    },
+    id: "total_diputado",
+    type: "number",
+    value: "330"
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.candidateDiputados, function (candidate) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: candidate,
+      "class": "p-field"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+      style: {
+        "width": "70%",
+        "float": "left"
+      },
+      "for": "candidato_diputado_".concat(candidate.id),
+      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(candidate.titulo)
+    }, null, 8
+    /* PROPS */
+    , _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
+      style: {
+        "width": "30%",
+        "float": "left",
+        "margin-bottom": "10px"
+      },
+      id: "candidato_diputado_".concat(candidate.id),
+      type: "number"
+    }, null, 8
+    /* PROPS */
+    , ["id"])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
     "class": "p-button-lg",
     label: "Guardar",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.save();
     })
-  })])])])])])], 64
+  })])])])])])])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -52994,6 +53885,58 @@ _Statistics_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].
 
 /***/ }),
 
+/***/ "./resources/js/Pages/StatisticsDiputado.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/Pages/StatisticsDiputado.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StatisticsDiputado_vue_vue_type_template_id_4e16c92e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StatisticsDiputado.vue?vue&type=template&id=4e16c92e */ "./resources/js/Pages/StatisticsDiputado.vue?vue&type=template&id=4e16c92e");
+/* harmony import */ var _StatisticsDiputado_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StatisticsDiputado.vue?vue&type=script&lang=js */ "./resources/js/Pages/StatisticsDiputado.vue?vue&type=script&lang=js");
+
+
+
+_StatisticsDiputado_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _StatisticsDiputado_vue_vue_type_template_id_4e16c92e__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_StatisticsDiputado_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Pages/StatisticsDiputado.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_StatisticsDiputado_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/StatisticsPresidente.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Pages/StatisticsPresidente.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StatisticsPresidente_vue_vue_type_template_id_f5bb0d5e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e */ "./resources/js/Pages/StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e");
+/* harmony import */ var _StatisticsPresidente_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StatisticsPresidente.vue?vue&type=script&lang=js */ "./resources/js/Pages/StatisticsPresidente.vue?vue&type=script&lang=js");
+
+
+
+_StatisticsPresidente_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _StatisticsPresidente_vue_vue_type_template_id_f5bb0d5e__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_StatisticsPresidente_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Pages/StatisticsPresidente.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_StatisticsPresidente_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Welcome.vue":
 /*!****************************************!*\
   !*** ./resources/js/Pages/Welcome.vue ***!
@@ -53644,6 +54587,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Statistics_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Statistics_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Statistics.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Statistics.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/StatisticsDiputado.vue?vue&type=script&lang=js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/Pages/StatisticsDiputado.vue?vue&type=script&lang=js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsDiputado_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsDiputado_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StatisticsDiputado.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsDiputado.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/StatisticsPresidente.vue?vue&type=script&lang=js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Pages/StatisticsPresidente.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsPresidente_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsPresidente_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StatisticsPresidente.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsPresidente.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -54352,6 +55327,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/StatisticsDiputado.vue?vue&type=template&id=4e16c92e":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Pages/StatisticsDiputado.vue?vue&type=template&id=4e16c92e ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsDiputado_vue_vue_type_template_id_4e16c92e__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsDiputado_vue_vue_type_template_id_4e16c92e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StatisticsDiputado.vue?vue&type=template&id=4e16c92e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsDiputado.vue?vue&type=template&id=4e16c92e");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsPresidente_vue_vue_type_template_id_f5bb0d5e__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StatisticsPresidente_vue_vue_type_template_id_f5bb0d5e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/StatisticsPresidente.vue?vue&type=template&id=f5bb0d5e");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Welcome.vue?vue&type=template&id=317d1a6e&scoped=true":
 /*!**********************************************************************************!*\
   !*** ./resources/js/Pages/Welcome.vue?vue&type=template&id=317d1a6e&scoped=true ***!
@@ -54649,6 +55656,10 @@ var map = {
 	"./Profile/Show.vue": "./resources/js/Pages/Profile/Show.vue",
 	"./Statistics": "./resources/js/Pages/Statistics.vue",
 	"./Statistics.vue": "./resources/js/Pages/Statistics.vue",
+	"./StatisticsDiputado": "./resources/js/Pages/StatisticsDiputado.vue",
+	"./StatisticsDiputado.vue": "./resources/js/Pages/StatisticsDiputado.vue",
+	"./StatisticsPresidente": "./resources/js/Pages/StatisticsPresidente.vue",
+	"./StatisticsPresidente.vue": "./resources/js/Pages/StatisticsPresidente.vue",
 	"./Welcome": "./resources/js/Pages/Welcome.vue",
 	"./Welcome.vue": "./resources/js/Pages/Welcome.vue"
 };

@@ -2,7 +2,7 @@
     <app-layout title="Elecciones 2021">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Resultado conteo estadístico
+                Resultado conteo presidente
             </h2>
         </template>
 
@@ -74,6 +74,7 @@
                 type: 'bar', //bar, pie, doughnut
                 filter: 'Provincial',
                 title: 'Provincial',
+                eleccion: 'presidente',
                 chartData: {
                     labels: [],
                     datasets: []
@@ -103,7 +104,7 @@
         },
         methods: {
             getVotes() {
-                return axios.get(`/api/getVotes/${this.filter}`).then((data) => {
+                return axios.get(`/api/getVotes/${this.filter}/${this.eleccion}`).then((data) => {
                     let labels = [];
                     let dataset = {
                         label: 'Candidatos',

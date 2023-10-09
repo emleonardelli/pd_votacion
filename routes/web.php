@@ -20,9 +20,8 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
-Route::get('/estadisticas', function () {
-    return Inertia::render('Statistics');
-})->name('inicio');
+Route::get('/estadisticas-presidente', function () {return Inertia::render('StatisticsPresidente');})->name('estadisticas-presidente');
+Route::get('/estadisticas-diputado', function () {return Inertia::render('StatisticsDiputado');})->name('estadisticas-diputado');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');

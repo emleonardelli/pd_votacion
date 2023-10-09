@@ -12,19 +12,24 @@ use Maatwebsite\Excel\Facades\Excel;
 class FormController extends Controller
 {
     private $cantidad_de_mesas = [
-        'Provincial'         => 1574,
-        'Valle_Inferior'     => 180,
-        'Atlantico'          => 99,
-        'Linea_Sur'          => 44,
-        'Cordillera'         => 369,
-        'Valle_Medio'        => 117,
-        'Alto_Valle_Este'    => 107,
-        'Alto_Valle_Centro'  => 315,
-        'Alto_Valle_Oeste'   => 343,
+        'Provincial'     => 1800,
+        'Adolfo_Alsina'  => 180,
+        'Conesa'         => 18,
+        'San_Antonio'    => 88,
+        'Valcheta'       => 17,
+        '9_de_Julio'     => 11,
+        '25_de_Mayo'     => 42,
+        'Ñorquinco'      => 8,
+        'Pilcaniyeu'     => 30,
+        'Bariloche'      => 385,
+        'Pichi_Mahuida'  => 38,
+        'Avellaneda'     => 96,
+        'General_Roca'   => 86,
+        'El_Cuy'         => 12,
     ];
 
     public function getCandidates() {
-        $list = Candidate::select(['id', 'lista', 'partido_sigla', 'nombre'])->orderBy('id', 'ASC')->get();
+        $list = Candidate::select(['id', 'eleccion',  'lista', 'partido_sigla', 'nombre'])->orderBy('id', 'ASC')->get();
         $list->map(function($candidate) {
             if ($candidate->lista == 0) {
                 $candidate->titulo = "$candidate->nombre";
@@ -36,8 +41,9 @@ class FormController extends Controller
     }
 
     public function saveCandidates(Request $r) {
-        $check = Form::where('mesa', $r->mesa)->count();
-        if ($check > 0) {
+        $check_presidente = Form::where('mesa', $r->mesa_presidente)->where('eleccion', 'presidente')->count();
+        $check_diputado = Form::where('mesa', $r->mesa_diputado)->where('eleccion', 'diputado')->count();
+        if ($check_presidente > 0 || $check_diputado > 0) {
             return response()->json([
                 'error' => 'Este formulario ya fue cargado!',
                 'data' => [],
@@ -47,11 +53,19 @@ class FormController extends Controller
 
         $candidatos = Candidate::all();
         $error = true;
-        $total_cargados = null;
-        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados) {
-            if ($r->input('candidato_'.$candidato->id)) {
+        $total_cargados_presidente = null;
+        $total_cargados_diputado = null;
+        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados_presidente) {
+            if ($r->input('candidato_presidente_'.$candidato->id)) {
                 $error = false;
-                $total_cargados += $r->input('candidato_'.$candidato->id);
+                $total_cargados_presidente += $r->input('candidato_presidente_'.$candidato->id);
+            }
+        });
+
+        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados_diputado) {
+            if ($r->input('candidato_diputado_'.$candidato->id)) {
+                $error = false;
+                $total_cargados_diputado += $r->input('candidato_diputado_'.$candidato->id);
             }
         });
 
@@ -63,7 +77,7 @@ class FormController extends Controller
             ]);
         }
 
-        if ($r->total < $total_cargados) {
+        if ($r->total_presidente < $total_cargados_presidente || $r->total_diputado < $total_cargados_diputado) {
             return response()->json([
                 'error' => 'El total de votos es mayor al total del padron!',
                 'data' => [],
@@ -71,15 +85,31 @@ class FormController extends Controller
             ]);
         }
 
-        $form = Form::create([
-            'mesa' => $r->mesa,
-            'total_votantes' => $r->total,
+        $form_presidente = Form::create([
+            'mesa' => $r->mesa_presidente,
+            'eleccion' => 'presidente',
+            'total_votantes' => $r->total_presidente,
         ]);
-        $form->save();
-        $candidatos->map(function($candidato) use ($r, $form) {
+        $form_presidente->save();
+        $candidatos->map(function($candidato) use ($r, $form_presidente) {
             Vote::insert([
-                'cantidad' => $r->input('candidato_'.$candidato->id) ? $r->input('candidato_'.$candidato->id) : 0,
-                'formulario_id' => $form->id,
+                'eleccion' => 'presidente',
+                'cantidad' => $r->input('candidato_presidente_'.$candidato->id) ? $r->input('candidato_presidente_'.$candidato->id) : 0,
+                'formulario_id' => $form_presidente->id,
+                'candidato_id' => $candidato->id,
+            ]);
+        });
+        $form_diputado = Form::create([
+            'mesa' => $r->mesa_diputado,
+            'eleccion' => 'diputado',
+            'total_votantes' => $r->total_diputado,
+        ]);
+        $form_diputado->save();
+        $candidatos->map(function($candidato) use ($r, $form_diputado) {
+            Vote::insert([
+                'eleccion' => 'diputado',
+                'cantidad' => $r->input('candidato_diputado_'.$candidato->id) ? $r->input('candidato_diputado_'.$candidato->id) : 0,
+                'formulario_id' => $form_diputado->id,
                 'candidato_id' => $candidato->id,
             ]);
         });
@@ -92,49 +122,39 @@ class FormController extends Controller
 
     public function getVotes(Request $r) {
         switch ($r->filter) {
-            case 'Provincial':
-                return $this->getByForm('Provincial', 0, 1689);
-            break;
-            case 'Valle_Inferior':
-                return $this->getByForm('Valle_Inferior', 1, 190);
-            break;
-            case 'Atlantico':
-                return $this->getByForm('Atlantico', 191, 290);
-            break;
-            case 'Linea_Sur':
-                return $this->getByForm('Linea_Sur', 295, 347);
-            break;
-            case 'Cordillera':
-                return $this->getByForm('Cordillera', 363, 745);
-            break;
-            case 'Valle_Medio':
-                return $this->getByForm('Valle_Medio', 751, 880);
-            break;
-            case 'Alto_Valle_Este':
-                return $this->getByForm('Alto_Valle_Este', 883, 1000);
-            break;
-            case 'Alto_Valle_Centro':
-                return $this->getByForm('Alto_Valle_Centro', 1008, 1322);
-            break;
-            case 'Alto_Valle_Oeste':
-                return $this->getByForm('Alto_Valle_Oeste', 1323, 1689);
-            break;
+            case 'Provincial':     return $this->getByForm($r->eleccion, 'Provincial', 0, 1800);        break;
+            case 'Adolfo_Alsina':  return $this->getByForm($r->eleccion, 'Adolfo_Alsina', 1, 180);      break;
+            case 'Conesa':         return $this->getByForm($r->eleccion, 'Conesa', 182, 200);           break;
+            case 'San_Antonio':    return $this->getByForm($r->eleccion, 'San_Antonio', 201, 289);      break;
+            case 'Valcheta':       return $this->getByForm($r->eleccion, 'Valcheta', 290, 307);         break;
+            case '9_de_Julio':     return $this->getByForm($r->eleccion, '9_de_Julio', 308, 319);       break;
+            case '25_de_Mayo':     return $this->getByForm($r->eleccion, '25_de_Mayo', 320, 362);       break;
+            case 'Ñorquinco':      return $this->getByForm($r->eleccion, 'Ñorquinco', 363, 371);        break;
+            case 'Pilcaniyeu':     return $this->getByForm($r->eleccion, 'Pilcaniyeu', 372, 402);       break;
+            case 'Bariloche':      return $this->getByForm($r->eleccion, 'Bariloche', 403, 788);        break;
+            case 'Pichi_Mahuida':  return $this->getByForm($r->eleccion, 'Pichi_Mahuida', 789, 827);    break;
+            case 'Avellaneda':     return $this->getByForm($r->eleccion, 'Avellaneda', 828, 924);       break;
+            case 'General_Roca':   return $this->getByForm($r->eleccion, 'General_Roca', 925, 1787);    break;
+            case 'El_Cuy':         return $this->getByForm($r->eleccion, 'El_Cuy', 1788, 1800);         break;
         }
     }
 
-    private function getByForm($zona, $desde, $hasta, $desde2 = null, $hasta2 = null) {
-        $candidatos = Candidate::select('id', 'color', 'nombre')->where('id', '<=', 9)->get();
+    private function getByForm($eleccion, $zona, $desde, $hasta, $desde2 = null, $hasta2 = null) {
+        $candidatos = Candidate::select('id', 'color', 'nombre')
+            ->where('lista', '<>', 0)
+            ->where('eleccion', $eleccion)
+            ->get();
         $forms = [];
         if ($desde2) {
-            $forms_a=Form::where('mesa', '>=', $desde)->where('mesa', '<=', $hasta);
-            $forms=Form::where('mesa', '>=', $desde2)->where('mesa', '<=', $hasta2)->union($forms_a)->get();
+            $forms_a=Form::where('mesa', '>=', $desde)->where('eleccion', $eleccion)->where('mesa', '<=', $hasta);
+            $forms=Form::where('mesa', '>=', $desde2)->where('eleccion', $eleccion)->where('mesa', '<=', $hasta2)->union($forms_a)->get();
         }else{
-            $forms=Form::where('mesa', '>=', $desde)->where('mesa', '<=', $hasta)->get();
+            $forms=Form::where('mesa', '>=', $desde)->where('eleccion', $eleccion)->where('mesa', '<=', $hasta)->get();
         }
         $res = [];
         $votos_totales=0;
-        $forms->map(function($form) use (&$votos_totales) {
-            $votos_del_form = Vote::where('formulario_id', $form->id)->where('candidato_id', '<=', 9)->get();
+        $forms->map(function($form) use (&$votos_totales, $eleccion) {
+            $votos_del_form = Vote::where('formulario_id', $form->id)->where('eleccion', $eleccion)->get();
             $votos_del_form->map(function($voto) use (&$votos_totales) {
                 $votos_totales += $voto->cantidad;
             });
@@ -150,7 +170,7 @@ class FormController extends Controller
             });
             array_push($res, [
                 'nombre' => $candidato->nombre,
-                'votos' => $votos/$votos_totales * 100,
+                'votos' => $votos_totales == 0 ? 0 : ($votos/$votos_totales * 100),
                 'color' => $candidato->color,
             ]);
         }
@@ -191,9 +211,9 @@ class FormController extends Controller
 
         return [
             'grafico' => $res,
-            'votos_nulos' => number_format($votos_invalidos / $votos_totales * 100, 2, ',', '.'). ' %',
-            'mesas_computadas' => number_format($mesas / $mesas_total * 100, 2, ',', '.'). " % ($mesas de $mesas_total)",
-            'asistencia' => number_format($asistencia / $asistencia_total * 100, 2, ',', '.'). " % ($asistencia de $asistencia_total)",
+            'votos_nulos' => number_format($votos_totales == 0 ? 0 : $votos_invalidos / $votos_totales * 100, 2, ',', '.'). ' %',
+            'mesas_computadas' => number_format($mesas_total == 0 ? 0 : $mesas / $mesas_total * 100, 2, ',', '.'). " % ($mesas de $mesas_total)",
+            'asistencia' => number_format($asistencia_total == 0 ? 0 : $asistencia / $asistencia_total * 100, 2, ',', '.'). " % ($asistencia de $asistencia_total)",
         ];
     }
 
