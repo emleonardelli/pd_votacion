@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Elecciones 2021">
+    <app-layout title="Elecciones 2023">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Resultado conteo presidente

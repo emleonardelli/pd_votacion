@@ -19,7 +19,7 @@ class CreateFormsTable extends Migration
             $table->string('eleccion'); //diputados presidentes
             $table->integer('mesa');
             $table->integer('total_votantes')->default(0);
-            $table->unsignedBigInteger('certificado_id');
+            $table->unsignedBigInteger('certificado_id')->nullable();
             $table->foreign('certificado_id')->references('id')->on('files');
         });
     }
