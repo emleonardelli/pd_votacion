@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\VotesExport;
+use App\File;
 use App\Models\Candidate;
 use App\Models\Form;
 use App\Models\Vote;
@@ -42,8 +43,7 @@ class FormController extends Controller
 
     public function saveCandidates(Request $r) {
         $check_presidente = Form::where('mesa', $r->mesa_presidente)->where('eleccion', 'presidente')->count();
-        $check_diputado = Form::where('mesa', $r->mesa_diputado)->where('eleccion', 'diputado')->count();
-        if ($check_presidente > 0 || $check_diputado > 0) {
+        if ($check_presidente > 0) {
             return response()->json([
                 'error' => 'Este formulario ya fue cargado!',
                 'data' => [],
@@ -54,18 +54,10 @@ class FormController extends Controller
         $candidatos = Candidate::all();
         $error = true;
         $total_cargados_presidente = null;
-        $total_cargados_diputado = null;
         $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados_presidente) {
             if ($r->input('candidato_presidente_'.$candidato->id)) {
                 $error = false;
                 $total_cargados_presidente += $r->input('candidato_presidente_'.$candidato->id);
-            }
-        });
-
-        $candidatos->map(function($candidato) use ($r, &$error, &$total_cargados_diputado) {
-            if ($r->input('candidato_diputado_'.$candidato->id)) {
-                $error = false;
-                $total_cargados_diputado += $r->input('candidato_diputado_'.$candidato->id);
             }
         });
 
@@ -77,7 +69,7 @@ class FormController extends Controller
             ]);
         }
 
-        if ($r->total_presidente < $total_cargados_presidente || $r->total_diputado < $total_cargados_diputado) {
+        if ($r->total_presidente < $total_cargados_presidente) {
             return response()->json([
                 'error' => 'El total de votos es mayor al total del padron!',
                 'data' => [],
@@ -89,6 +81,7 @@ class FormController extends Controller
             'mesa' => $r->mesa_presidente,
             'eleccion' => 'presidente',
             'total_votantes' => $r->total_presidente,
+            'certificado_id' => $r->certificado_id,
         ]);
         $form_presidente->save();
         $candidatos->map(function($candidato) use ($r, $form_presidente) {
@@ -96,20 +89,6 @@ class FormController extends Controller
                 'eleccion' => 'presidente',
                 'cantidad' => $r->input('candidato_presidente_'.$candidato->id) ? $r->input('candidato_presidente_'.$candidato->id) : 0,
                 'formulario_id' => $form_presidente->id,
-                'candidato_id' => $candidato->id,
-            ]);
-        });
-        $form_diputado = Form::create([
-            'mesa' => $r->mesa_diputado,
-            'eleccion' => 'diputado',
-            'total_votantes' => $r->total_diputado,
-        ]);
-        $form_diputado->save();
-        $candidatos->map(function($candidato) use ($r, $form_diputado) {
-            Vote::insert([
-                'eleccion' => 'diputado',
-                'cantidad' => $r->input('candidato_diputado_'.$candidato->id) ? $r->input('candidato_diputado_'.$candidato->id) : 0,
-                'formulario_id' => $form_diputado->id,
                 'candidato_id' => $candidato->id,
             ]);
         });

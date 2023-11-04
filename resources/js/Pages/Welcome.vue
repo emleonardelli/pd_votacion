@@ -1,5 +1,5 @@
 <template>
-    <Head title="Elecciones 2021" />
+    <Head title="Elecciones 2023" />
     <Toast />
     <div class="relative min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0">
         <div class="relative flex items-top justify-center">
@@ -50,62 +50,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="max-w-6xl sm:px-6 lg:px-8">
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div class="mt-2 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="p-6">
-                        <div class="flex items-center">
-                            <div class="ml-1 text-lg leading-7 font-semibold">
-                                <span class="underline text-gray-900 dark:text-white">CARGA DE VOTOS DIPUTADOS</span>
-                            </div>
-                        </div>
-                        <br>
                         <div class="p-fluid">
                             <div class="p-field">
-                                <label
-                                    style="width: 50%; float: left"
-                                    for="mesa_diputado">Mesa N&deg;</label>
+                                <div class="flex items-center">
+                                    <div class="ml-1 text-lg leading-7 font-semibold">
+                                        <span class="underline text-gray-900 dark:text-white">CARGA EL CERTIFICADO DEL FISCAL</span>
+                                    </div>
+                                </div>
+                                <p>Chequeá que la imagen se vea nítida y completa antes de subirla.</p>
+                                <br>
                                 <InputText
-                                    style="width: 50%; float: left;margin-bottom: 10px"
-                                    id="mesa_diputado" type="number" />
-                            </div>
-                            <div class="p-field">
-                                <label
-                                    style="width: 50%; float: left"
-                                    for="total_diputado">Total Votantes Empadronados</label>
-                                <InputText
-                                    style="width: 50%; float: left;margin-bottom: 10px;"
-                                    id="total_diputado" type="number" value="330"/>
-                            </div>
-                        </div>
-                        <div class="p-fluid">
-                            <div
-                                v-for="candidate in candidateDiputados"
-                                :key="candidate"
-                                class="p-field"
-                            >
-                                <label
-                                    style="width: 70%; float: left"
-                                    :for="`candidato_diputado_${candidate.id}`"
-                                    v-text="candidate.titulo"
-                                ></label>
-                                <InputText
-                                    style="width: 30%; float: left; margin-bottom: 10px"
-                                    :id="`candidato_diputado_${candidate.id}`"
-                                    type="number"
+                                    style="width: 100%; float: left; margin-bottom: 10px"
+                                    type="file"
+                                    ref="file"
+                                    @change="uploadFile"
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="relative flex justify-center ">
-            <div class="max-w-6xl sm:px-6 lg:px-8">
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div class="mt-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                     <div class="p-6">
-                        <div class="mt-2 text-center text-gray-600 dark:text-gray-400 text-sm">
-                            <Button class="p-button-lg" label="Guardar" @click="save()"/>
+                        <div class="p-fluid">
+                            <div class="p-field">
+                                <Button class="p-button-lg" label="Guardar" @click="save()"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -152,36 +123,55 @@
 </style>
 
 <script>
-    import { defineComponent } from 'vue'
+    import { ref, defineComponent } from 'vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Button from 'primevue/button';
     import InputText from 'primevue/inputtext';
     import Toast from 'primevue/toast';
-
     export default defineComponent({
         data() {
             return {
                 candidatePresidentes: [],
                 candidateDiputados: [],
+                certificado_id: null,
             }
         },
         mounted() {
             this.getCandidates();
         },
         methods: {
+            uploadFile(event) {
+                //this.file = event.target.files[0];
+                let formData = new FormData();
+                formData.append('file', event.target.files[0]);
+                axios.post('/api/upload-file', formData)
+                .then(response => {
+                    this.certificado_id = response.data.certificado_id;
+                    this.$toast.add({
+                        severity:'success',
+                        summary: 'Guardado exitoso',
+                        detail: 'Certificado guardado exitosamente',
+                        life: 2000
+                    });
+                })
+                .catch(error => {
+                    this.$toast.add({
+                        severity:'error',
+                        summary: 'Error en carga de archivo!',
+                        detail: error,
+                        life: 3000
+                    });
+                });
+            },
             save() {
                 let model = {
                     mesa_presidente: document.getElementById('mesa_presidente').value,
-                    mesa_diputado: document.getElementById('mesa_diputado').value,
                     total_presidente: document.getElementById('total_presidente').value,
-                    total_diputado: document.getElementById('total_diputado').value,
                 };
                 this.candidatePresidentes.map((candidate) => {
                     model[`candidato_presidente_${candidate.id}`] = document.getElementById(`candidato_presidente_${candidate.id}`).value;
                 });
-                this.candidateDiputados.map((candidate) => {
-                    model[`candidato_diputado_${candidate.id}`] = document.getElementById(`candidato_diputado_${candidate.id}`).value;
-                });
+                model['certificado_id']=this.certificado_id;
                 axios.post('/api/saveCandidates', model).then((res) => {
                     if (res.data.status == 406) {
                         this.$toast.add({
@@ -206,7 +196,6 @@
             getCandidates() {
                 return axios.get('/api/getCandidates').then((data) => {
                     this.candidatePresidentes = data.data.filter(item => item.eleccion === 'presidente');
-                    this.candidateDiputados = data.data.filter(item => item.eleccion !== 'presidente');
                 });
             },
         },

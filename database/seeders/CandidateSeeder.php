@@ -30,10 +30,12 @@ class CandidateSeeder extends Seeder
         503 – UP / Martín Soria			color celeste
         504 – FIT / Alhue Gavuzzo			color rojo
         */
+        Candidate::insert(['id' => 1, 'eleccion' => 'presidente', 'color' => '#5b9bd5', 'lista' => '134','partido_sigla' => 'UP','nombre' => 'Sergio Massa']);
+        Candidate::insert(['id' => 2, 'eleccion' => 'presidente', 'color' => '#7030a0', 'lista' => '135','partido_sigla' => 'LLA','nombre' => 'Javier Milei']);
+        
+        /*
         Candidate::insert(['id' => 1, 'eleccion' => 'presidente', 'color' => '#FFFF00', 'lista' => '132','partido_sigla' => 'JxC','nombre' => 'Patricia Bullrich']);
         Candidate::insert(['id' => 2, 'eleccion' => 'presidente', 'color' => '#ff6600', 'lista' => '133','partido_sigla' => 'Hacemos','nombre' => 'Juan Scharetti']);
-        Candidate::insert(['id' => 3, 'eleccion' => 'presidente', 'color' => '#5b9bd5', 'lista' => '134','partido_sigla' => 'UP','nombre' => 'Sergio Massa']);
-        Candidate::insert(['id' => 4, 'eleccion' => 'presidente', 'color' => '#7030a0', 'lista' => '135','partido_sigla' => 'LLA','nombre' => 'Javier Milei']);
         Candidate::insert(['id' => 5, 'eleccion' => 'presidente', 'color' => '#ff0000', 'lista' => '136','partido_sigla' => 'FIT','nombre' => 'Myriam Bregman']);
         Candidate::insert(['id' => 6, 'eleccion' => 'presidente', 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos en Blancos']);
         Candidate::insert(['id' => 7, 'eleccion' => 'presidente', 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos Nulos']);
@@ -49,7 +51,7 @@ class CandidateSeeder extends Seeder
         Candidate::insert(['id' => 16, 'eleccion' => 'diputado', 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos Nulos']);
         Candidate::insert(['id' => 17, 'eleccion' => 'diputado', 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos Recurridos']);
         Candidate::insert(['id' => 18, 'eleccion' => 'diputado', 'color' => '#', 'lista' => '0','partido_sigla' => '0','nombre' => 'Votos Impugnados']);
-
+        */
         // 50          PS      Paola Echepareborda
         // 165         MAS     Elena Correa
         // 504         Fdt     Ana Marks
